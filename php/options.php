@@ -1,0 +1,49 @@
+<?php
+
+    function createComboBoxes($mysqli, $itemsPerPage) : void {
+        // items per page
+        echo "<label for='itemsPerPage'>Pagination:</label>";
+        echo "<select name='pagination' id='itemsPerPage'>";
+        echo "<option value='10'" . ($itemsPerPage == 10 ? " selected" : "") . ">10</option>";
+        echo "<option value='20'" . ($itemsPerPage == 20 ? " selected" : "") . ">20</option>";
+        echo "<option value='30'" . ($itemsPerPage == 30 ? " selected" : "") . ">30</option>";
+        echo "</select>";
+
+        // years
+        echo "<label for='yearComboBox'>Year:</label>";
+        echo "<select name='year' id='yearComboBox'>";
+        echo "<option value=''>All</option>";
+        // Fetch and display options for years
+        $sql_years = "SELECT DISTINCT year FROM prizes";
+        $result_years = $mysqli->query($sql_years);
+        while ($row_years = $result_years->fetch_assoc()) {
+            $year = $row_years["year"];
+            echo "<option value='$year'>$year</option>";
+        }
+        echo "</select>";
+
+        // categories
+        echo "<label for='categoryComboBox'>Category:</label>";
+        echo "<select name='category' id='categoryComboBox'>";
+        echo "<option value=''>All</option>";
+        // Fetch and display options for categories
+        $sql_categories = "SELECT DISTINCT category FROM prizes";
+        $result_categories = $mysqli->query($sql_categories);
+        while ($row_categories = $result_categories->fetch_assoc()) {
+            $category = $row_categories["category"];
+            echo "<option value='$category'>$category</option>";
+        }
+        echo "</select>";
+    }
+
+    function createTableHeader($sort, $order, $page) : void {
+        echo "<thead><tr id='tableHead'>";
+        echo '<th><a href="?page=' . $page . '&sort=surname&order=' . ($sort == 'surname' && $order == 'asc' ? 'desc' : 'asc') . '">Surname</a></th>';
+        echo '<th><a href="?page=' . $page . '&sort=year&order=' . ($sort == 'year' && $order == 'asc' ? 'desc' : 'asc') . '">Year</a></th>';
+        echo '<th><a href="?page=' . $page . '&sort=category&order=' . ($sort == 'category' && $order == 'asc' ? 'desc' : 'asc') . '">Category</a></th>';
+        echo '<th>Organisation</th>';
+        echo '<th>Country</th>';
+        echo "</tr></thead>";
+    }
+
+?>
