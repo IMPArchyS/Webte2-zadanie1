@@ -1,4 +1,4 @@
-$('#itemsPerPage').on('change', function () {
+$('#categoryComboBox').on('change', function () {
     // Get the new limit
     var newLimit = $(this).val();
 
@@ -11,7 +11,7 @@ $('#itemsPerPage').on('change', function () {
     url.searchParams.delete('order');
 
     // Set the new limit as a query parameter
-    url.searchParams.set('itemsPerPage', newLimit);
+    url.searchParams.set('category', newLimit);
 
     // Reload the page with the new URL
     window.location.href = url.href;

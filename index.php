@@ -14,13 +14,13 @@
     require "php/functions.php";
     include "php/header.php";
 
+    /// connect to DB
     $mysqli = createMySqlConnection();
-    
     if ($mysqli != null) echo "<p>Connected successfully</p>";
 
+    /// filters
     $page = isset($_GET['page']) ? $_GET['page'] : 1;
     $itemsPerPage = isset($_GET['itemsPerPage']) ? $_GET['itemsPerPage'] : 10;
-    echo "<p>items per page " . $itemsPerPage . "</p>";
 
     $offset = ($page - 1) * $itemsPerPage;
     $sql_count = "SELECT COUNT(*) as total FROM people";
@@ -29,100 +29,53 @@
     $totalItems = $row_count['total'];
     $totalPages = ceil($totalItems / $itemsPerPage);
 
+    // sort fields
     $sort = isset($_GET['sort']) ? $_GET['sort'] : null; // Default sort field
     $order = isset($_GET['order']) ? $_GET['order'] : null; // Default sort order
     $year = isset($_GET['year']) ? $_GET['year'] : null; // Default year filter
     $category = isset($_GET['category']) ? $_GET['category'] : null; // Default category filter
-    
+
     // Ensure $sort and $order contain valid values
-    $allowed_sort_fields = ['surname', 'year', 'category', 'id'];
+    $allowed_sort_fields = ['surname', 'year', 'category'];
     $allowed_order_values = ['asc', 'desc'];
     
     if ($sort && !in_array($sort, $allowed_sort_fields)) {
         $sort = null;
-    }
-    
+    }    
     if ($order && !in_array($order, $allowed_order_values)) {
         $order = null;
     }
-    
     // Calculate the offset for the SQL query
     $offset = ($page - 1) * $itemsPerPage;
     
-    // SQL query
-    if ($sort && $order) {
-        $sql = "SELECT people.surname, people.organization, countries.name AS country_name, prizes.year, prizes.category
-        FROM people
-        LEFT JOIN countries ON people.country_id = countries.id
-        LEFT JOIN prizes ON people.id = prizes.person_id
-        ORDER BY $sort $order
-        LIMIT $itemsPerPage OFFSET $offset";
-    } else {
-        $sql = "SELECT people.surname, people.organization, countries.name AS country_name, prizes.year, prizes.category
-        FROM people
-        LEFT JOIN countries ON people.country_id = countries.id
-        LEFT JOIN prizes ON people.id = prizes.person_id
-        LIMIT $itemsPerPage OFFSET $offset";
-    }
-
+    /// SQL query
+    $sql = createSqlQuery($sort, $order, $itemsPerPage, $offset);
     $result = $mysqli->query($sql);
-    echo "<p>Number of rows: " . $result->num_rows . "</p>";
     
+    /// table
     echo "<section>";
-    echo "<form method='GET'>";
-    createComboBoxes($mysqli, $itemsPerPage);
-    echo "</form>";
-
+    createComboBoxes($mysqli, $itemsPerPage, $year, $category);
     echo "<table border='1' id='nobelStuff'>";
-    createTableHeader($sort, $order, $page);
+    createTableHeader($sort, $order, $page, $itemsPerPage);
 
     if ($result->num_rows > 0) {
         // Fetch and display data of each row
         while($row = $result->fetch_assoc()) {
-            $surname = isset($row['surname']) ? $row['surname'] : '';
-            $organisation = isset($row["organization"]) ? $row["organization"] : "";
-            $country_name = isset($row["country_name"]) ? $row["country_name"] : "";
-            $year = isset($row["year"]) ? $row["year"] : "";
-            $category = isset($row["category"]) ? $row["category"] : "";
-
-            echo "<tr>";
-            echo '<td class="surname"><a href="php/person.php?surname=' . rawurlencode($surname) . '">' . htmlspecialchars($surname) . '</a></td>';
-            echo "<td>" . $year . "</td>";
-            echo "<td>" . $category . "</td>";
-            echo "<td>" . $organisation . "</td>";
-            echo "<td>" . $country_name . "</td>";
-            echo "</tr>";
+            createTableRow($row);
         }
     }
-
     echo "</table>";
-
-    echo '<div class="pagination">';
-
-    if ($page > 1) {
-        echo '<a href="?page=' . ($page - 1) . '&sort=' . $sort . '&order=' . $order . '">Previous</a>';
-    }
-    
-    for ($i = 1; $i <= $totalPages; $i++) {
-        if ($i == $page) {
-            echo '<strong>' . $i . '</strong>';
-        } else {
-            echo '<a href="?page=' . $i . '&sort=' . $sort . '&order=' . $order . '">' . $i . '</a>';
-        }
-    }
-    
-    if ($page < $totalPages) {
-        echo '<a href="?page=' . ($page + 1) . '&sort=' . $sort . '&order=' . $order . '">Next</a>';
-    }
-    
-    echo '</div>';
+    createPagination($page, $totalPages, $itemsPerPage, $sort, $order);
     echo "</section>";
-    // Close connection
+
+    /// Close connection
     $mysqli->close();
 
     include "php/footer.php";
 ?>
 <script src="js/sort.js"></script>
+<script src="js/yearsSort.js"></script>
+<script src="js/categorySort.js"></script>
 <script src="js/itemsPerPage.js"></script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 <?php
 
-    function createComboBoxes($mysqli, $itemsPerPage) : void {
+    function createComboBoxes($mysqli, $itemsPerPage, $selectedYear, $selectedCategory) : void {
+        echo "<form method='GET'>";
         // items per page
         echo "<label for='itemsPerPage'>Pagination:</label>";
         echo "<select name='pagination' id='itemsPerPage'>";
@@ -12,35 +13,37 @@
         // years
         echo "<label for='yearComboBox'>Year:</label>";
         echo "<select name='year' id='yearComboBox'>";
-        echo "<option value=''>All</option>";
+        echo "<option value=''". ($selectedYear == '' ? " selected" : "") .">All</option>";
         // Fetch and display options for years
         $sql_years = "SELECT DISTINCT year FROM prizes";
         $result_years = $mysqli->query($sql_years);
         while ($row_years = $result_years->fetch_assoc()) {
             $year = $row_years["year"];
-            echo "<option value='$year'>$year</option>";
+            echo "<option value='$year'" . ($selectedYear == $year ? " selected" : "") . ">$year</option>";
         }
         echo "</select>";
 
         // categories
         echo "<label for='categoryComboBox'>Category:</label>";
         echo "<select name='category' id='categoryComboBox'>";
-        echo "<option value=''>All</option>";
+        echo "<option value=''". ($selectedCategory == '' ? " selected" : "") .">All</option>";
         // Fetch and display options for categories
         $sql_categories = "SELECT DISTINCT category FROM prizes";
         $result_categories = $mysqli->query($sql_categories);
         while ($row_categories = $result_categories->fetch_assoc()) {
             $category = $row_categories["category"];
-            echo "<option value='$category'>$category</option>";
+            echo "<option value='$category'" . ($selectedCategory == $category ? " selected" : "") . ">$category</option>";
         }
         echo "</select>";
+
+        echo "</form>";
     }
 
-    function createTableHeader($sort, $order, $page) : void {
+    function createTableHeader($sort, $order, $page, $itemsPerPage) : void {
         echo "<thead><tr id='tableHead'>";
-        echo '<th><a href="?page=' . $page . '&sort=surname&order=' . ($sort == 'surname' && $order == 'asc' ? 'desc' : 'asc') . '">Surname</a></th>';
-        echo '<th><a href="?page=' . $page . '&sort=year&order=' . ($sort == 'year' && $order == 'asc' ? 'desc' : 'asc') . '">Year</a></th>';
-        echo '<th><a href="?page=' . $page . '&sort=category&order=' . ($sort == 'category' && $order == 'asc' ? 'desc' : 'asc') . '">Category</a></th>';
+        echo '<th><a href="?page=' . $page . '&sort=surname&order=' . ($sort == 'surname' && $order == 'asc' ? 'desc' : 'asc') . '&itemsPerPage=' . $itemsPerPage . '">Surname</a></th>';
+        echo '<th><a href="?page=' . $page . '&sort=year&order=' . ($sort == 'year' && $order == 'asc' ? 'desc' : 'asc') . '&itemsPerPage=' . $itemsPerPage . '">Year</a></th>';
+        echo '<th><a href="?page=' . $page . '&sort=category&order=' . ($sort == 'category' && $order == 'asc' ? 'desc' : 'asc') . '&itemsPerPage=' . $itemsPerPage . '">Category</a></th>';
         echo '<th>Organisation</th>';
         echo '<th>Country</th>';
         echo "</tr></thead>";
