@@ -3,16 +3,19 @@
     function createComboBoxes($mysqli, $itemsPerPage, $selectedYear, $selectedCategory) : void {
         echo "<form method='GET'>";
         // items per page
+        echo "<div class='form-group'>";
         echo "<label for='itemsPerPage'>Pagination:</label>";
-        echo "<select name='pagination' id='itemsPerPage'>";
+        echo "<select name='pagination' id='itemsPerPage' class='form-control'>";
         echo "<option value='10'" . ($itemsPerPage == 10 ? " selected" : "") . ">10</option>";
         echo "<option value='20'" . ($itemsPerPage == 20 ? " selected" : "") . ">20</option>";
         echo "<option value='30'" . ($itemsPerPage == 30 ? " selected" : "") . ">30</option>";
         echo "</select>";
+        echo "</div>";
 
         // years
+        echo "<div class='form-group'>";
         echo "<label for='yearComboBox'>Year:</label>";
-        echo "<select name='year' id='yearComboBox'>";
+        echo "<select name='year' id='yearComboBox' class='form-control'>";
         echo "<option value=''". ($selectedYear == '' ? " selected" : "") .">All</option>";
         // Fetch and display options for years
         $sql_years = "SELECT DISTINCT year FROM prizes";
@@ -22,10 +25,12 @@
             echo "<option value='$year'" . ($selectedYear == $year ? " selected" : "") . ">$year</option>";
         }
         echo "</select>";
+        echo "</div>";
 
         // categories
+        echo "<div class='form-group'>";
         echo "<label for='categoryComboBox'>Category:</label>";
-        echo "<select name='category' id='categoryComboBox'>";
+        echo "<select name='category' id='categoryComboBox' class='form-control'>";
         echo "<option value=''". ($selectedCategory == '' ? " selected" : "") .">All</option>";
         // Fetch and display options for categories
         $sql_categories = "SELECT DISTINCT category FROM prizes";
@@ -35,15 +40,20 @@
             echo "<option value='$category'" . ($selectedCategory == $category ? " selected" : "") . ">$category</option>";
         }
         echo "</select>";
+        echo "</div>";
 
         echo "</form>";
     }
 
-    function createTableHeader($sort, $order, $page, $itemsPerPage) : void {
+    function createTableHeader($sort, $order, $page, $itemsPerPage, $selectedYear, $selectedCategory) : void {
         echo "<thead><tr id='tableHead'>";
+
         echo '<th><a href="?page=' . $page . '&sort=surname&order=' . ($sort == 'surname' && $order == 'asc' ? 'desc' : 'asc') . '&itemsPerPage=' . $itemsPerPage . '">Surname</a></th>';
-        echo '<th><a href="?page=' . $page . '&sort=year&order=' . ($sort == 'year' && $order == 'asc' ? 'desc' : 'asc') . '&itemsPerPage=' . $itemsPerPage . '">Year</a></th>';
-        echo '<th><a href="?page=' . $page . '&sort=category&order=' . ($sort == 'category' && $order == 'asc' ? 'desc' : 'asc') . '&itemsPerPage=' . $itemsPerPage . '">Category</a></th>';
+        if ($selectedYear == "")
+            echo '<th><a href="?page=' . $page . '&sort=year&order=' . ($sort == 'year' && $order == 'asc' ? 'desc' : 'asc') . '&itemsPerPage=' . $itemsPerPage . '">Year</a></th>';
+        if ($selectedCategory == "")
+            echo '<th><a href="?page=' . $page . '&sort=category&order=' . ($sort == 'category' && $order == 'asc' ? 'desc' : 'asc') . '&itemsPerPage=' . $itemsPerPage . '">Category</a></th>';    
+
         echo '<th>Organisation</th>';
         echo '<th>Country</th>';
         echo "</tr></thead>";

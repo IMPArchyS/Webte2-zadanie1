@@ -16,7 +16,6 @@
 
     /// connect to DB
     $mysqli = createMySqlConnection();
-    if ($mysqli != null) echo "<p>Connected successfully</p>";
 
     /// filters
     $page = isset($_GET['page']) ? $_GET['page'] : 1;
@@ -29,7 +28,7 @@
     $category = isset($_GET['category']) ? $_GET['category'] : null; // Default category filter
     
     $offset = ($page - 1) * $itemsPerPage;
-    $sql_count = "SELECT COUNT(*) as total FROM people";
+    $sql_count = "SELECT COUNT(*) as total FROM persons";
     $result_count = $mysqli->query($sql_count);
     $row_count = $result_count->fetch_assoc();
     //$totalItems = $row_count['total'];
@@ -56,8 +55,8 @@
     /// table
     echo "<section>";
     createComboBoxes($mysqli, $itemsPerPage, $year, $category);
-    echo "<table border='1' id='nobelStuff'>";
-    createTableHeader($sort, $order, $page, $itemsPerPage);
+    echo "<table class='table table-bordered table-striped' id='nobelStuff'>";
+    createTableHeader($sort, $order, $page, $itemsPerPage, $year, $category);
 
     if ($result->num_rows > 0) {
         // Fetch and display data of each row

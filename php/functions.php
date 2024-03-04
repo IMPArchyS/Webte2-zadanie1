@@ -18,16 +18,30 @@
     }
 
     function createSqlQuery($sort, $order, $itemsPerPage, $offset, $year, $category) : string {
-        $sql = "SELECT people.surname, people.organization, countries.name AS country_name, prizes.year, prizes.category
-                FROM people
-                LEFT JOIN countries ON people.country_id = countries.id
-                LEFT JOIN prizes ON people.id = prizes.person_id";
+        // default query
+        $sql = "SELECT persons.surname, persons.organisation, countries.name AS country_name, prizes.year, prizes.category
+                FROM persons
+                LEFT JOIN countries ON persons.country_id = countries.id
+                LEFT JOIN prizes ON persons.id = prizes.person_id";
 
+        // for year & category don't display year & category based whats selected
         if ($year && $category) {
+            $sql = "SELECT persons.surname, persons.organisation, countries.name AS country_name
+                    FROM persons
+                    LEFT JOIN countries ON persons.country_id = countries.id
+                    LEFT JOIN prizes ON persons.id = prizes.person_id";      
             $sql .= " WHERE prizes.year = '$year' AND prizes.category = '$category'";
         } elseif ($year) {
+            $sql = "SELECT persons.surname, persons.organisation, countries.name AS country_name, prizes.category
+                    FROM persons
+                    LEFT JOIN countries ON persons.country_id = countries.id
+                    LEFT JOIN prizes ON persons.id = prizes.person_id";
             $sql .= " WHERE prizes.year = '$year'";
         } elseif ($category) {
+            $sql = "SELECT persons.surname, persons.organisation, countries.name AS country_name, prizes.year
+                    FROM persons
+                    LEFT JOIN countries ON persons.country_id = countries.id
+                    LEFT JOIN prizes ON persons.id = prizes.person_id";
             $sql .= " WHERE prizes.category = '$category'";
         }
 
@@ -42,9 +56,9 @@
 
     function getCount($year, $category) : int {
         $sql = "SELECT COUNT(*) AS count
-                FROM people
-                LEFT JOIN countries ON people.country_id = countries.id
-                LEFT JOIN prizes ON people.id = prizes.person_id";
+                FROM persons
+                LEFT JOIN countries ON persons.country_id = countries.id
+                LEFT JOIN prizes ON persons.id = prizes.person_id";
 
         if ($year && $category) {
             $sql .= " WHERE prizes.year = '$year' AND prizes.category = '$category'";
@@ -62,21 +76,26 @@
 
     function createPagination($page, $totalPages, $itemsPerPage, $sort, $order, $year, $category): void {
         echo '<div class="pagination">';
-
+                
         if ($page > 1) {
-            echo '<a href="?page=' . ($page - 1) . '&itemsPerPage=' . $itemsPerPage . '&sort=' . $sort . '&order=' . $order . '&year=' . $year . '&category=' . $category . '">Previous</a>';
+            echo '<a class="btn btn-primary" href="?page=1&itemsPerPage=' . $itemsPerPage . '&sort=' . $sort . '&order=' . $order . '&year=' . $year . '&category=' . $category . '">First</a>';
+            echo '<a class="btn btn-primary" href="?page=' . ($page - 1) . '&itemsPerPage=' . $itemsPerPage . '&sort=' . $sort . '&order=' . $order . '&year=' . $year . '&category=' . $category . '">Previous</a>';
         }
 
-        for ($i = 1; $i <= $totalPages; $i++) {
+        $startPage = max(1, $page - 2);
+        $endPage = min($startPage + 4, $totalPages);
+
+        for ($i = $startPage; $i <= $endPage; $i++) {
             if ($i == $page) {
-                echo '<strong>' . $i . '</strong>';
+                echo '<strong class="btn btn-primary">' . $i . '</strong>';
             } else {
-                echo '<a href="?page=' . $i . '&itemsPerPage=' . $itemsPerPage . '&sort=' . $sort . '&order=' . $order . '&year=' . $year . '&category=' . $category . '">' . $i . '</a>';
+                echo '<a class="btn btn-primary" href="?page=' . $i . '&itemsPerPage=' . $itemsPerPage . '&sort=' . $sort . '&order=' . $order . '&year=' . $year . '&category=' . $category . '">' . $i . '</a>';
             }
         }
 
         if ($page < $totalPages) {
-            echo '<a href="?page=' . ($page + 1) . '&itemsPerPage=' . $itemsPerPage . '&sort=' . $sort . '&order=' . $order . '&year=' . $year . '&category=' . $category . '">Next</a>';
+            echo '<a class="btn btn-primary" href="?page=' . ($page + 1) . '&itemsPerPage=' . $itemsPerPage . '&sort=' . $sort . '&order=' . $order . '&year=' . $year . '&category=' . $category . '">Next</a>';
+            echo '<a class="btn btn-primary" href="?page=' . $totalPages . '&itemsPerPage=' . $itemsPerPage . '&sort=' . $sort . '&order=' . $order . '&year=' . $year . '&category=' . $category . '">Last</a>';
         }
 
         echo '</div>';
@@ -84,15 +103,20 @@
 
     function createTableRow($row) : void {
         $surname = isset($row['surname']) ? $row['surname'] : '';
-        $organisation = isset($row["organization"]) ? $row["organization"] : "";
+        $organisation = isset($row["organisation"]) ? $row["organisation"] : "";
         $country_name = isset($row["country_name"]) ? $row["country_name"] : "";
         $year = isset($row["year"]) ? $row["year"] : "";
         $category = isset($row["category"]) ? $row["category"] : "";
 
         echo "<tr>";
         echo '<td class="surname"><a href="php/person.php?surname=' . rawurlencode($surname) . '">' . htmlspecialchars($surname) . '</a></td>';
-        echo "<td>" . $year . "</td>";
-        echo "<td>" . $category . "</td>";
+
+        if (!$year == "")
+            echo "<td>" . $year . "</td>";
+
+        if (!$category == "")
+            echo "<td>" . $category . "</td>";
+
         echo "<td>" . $organisation . "</td>";
         echo "<td>" . $country_name . "</td>";
         echo "</tr>";

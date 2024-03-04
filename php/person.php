@@ -15,7 +15,13 @@
     $surname = isset($_GET['surname']) ? $_GET['surname'] : '';
 
     // Prepare and bind
-    $stmt = $conn->prepare("SELECT * FROM people WHERE surname = ?");
+    $stmt = $conn->prepare("SELECT persons.*, countries.name, prizes.*, prize_details.* 
+                            FROM persons 
+                            LEFT JOIN countries ON persons.country_id = countries.id 
+                            LEFT JOIN prizes ON persons.id = prizes.person_id
+                            LEFT JOIN prize_details ON prizes.prize_detail_id = prize_details.id 
+                            WHERE surname = ?");
+    
     $stmt->bind_param("s", $surname);
 
     // Execute the statement
@@ -29,6 +35,11 @@
 
     if ($row) {
         echo "<p>it works for " . $surname . "</p>";
+
+        // Display the fetched data
+        echo "<pre>";
+        print_r($row);
+        echo "</pre>";
     }
 
     $stmt->close();
