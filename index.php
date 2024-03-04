@@ -21,19 +21,20 @@
     /// filters
     $page = isset($_GET['page']) ? $_GET['page'] : 1;
     $itemsPerPage = isset($_GET['itemsPerPage']) ? $_GET['itemsPerPage'] : 10;
-
-    $offset = ($page - 1) * $itemsPerPage;
-    $sql_count = "SELECT COUNT(*) as total FROM people";
-    $result_count = $mysqli->query($sql_count);
-    $row_count = $result_count->fetch_assoc();
-    $totalItems = $row_count['total'];
-    $totalPages = ceil($totalItems / $itemsPerPage);
-
+    
     // sort fields
     $sort = isset($_GET['sort']) ? $_GET['sort'] : null; // Default sort field
     $order = isset($_GET['order']) ? $_GET['order'] : null; // Default sort order
     $year = isset($_GET['year']) ? $_GET['year'] : null; // Default year filter
     $category = isset($_GET['category']) ? $_GET['category'] : null; // Default category filter
+    
+    $offset = ($page - 1) * $itemsPerPage;
+    $sql_count = "SELECT COUNT(*) as total FROM people";
+    $result_count = $mysqli->query($sql_count);
+    $row_count = $result_count->fetch_assoc();
+    //$totalItems = $row_count['total'];
+    $totalItems = getCount($year, $category);
+    $totalPages = ceil($totalItems / $itemsPerPage);
 
     // Ensure $sort and $order contain valid values
     $allowed_sort_fields = ['surname', 'year', 'category'];
@@ -49,7 +50,7 @@
     $offset = ($page - 1) * $itemsPerPage;
     
     /// SQL query
-    $sql = createSqlQuery($sort, $order, $itemsPerPage, $offset);
+    $sql = createSqlQuery($sort, $order, $itemsPerPage, $offset, $year, $category);
     $result = $mysqli->query($sql);
     
     /// table
@@ -65,7 +66,7 @@
         }
     }
     echo "</table>";
-    createPagination($page, $totalPages, $itemsPerPage, $sort, $order);
+    createPagination($page, $totalPages, $itemsPerPage, $sort, $order, $year, $category);
     echo "</section>";
 
     /// Close connection
