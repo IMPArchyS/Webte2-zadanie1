@@ -59,4 +59,12 @@
         echo "</tr></thead>";
     }
 
-?>
+    function createLogoutButton() : void {
+        echo '<button id="user-logout" class="btn btn-primary">Logout</button>';
+    }
+
+    function createPersonButtons() : void {
+        echo '<button id="user-add-person" class="btn btn-primary m-1">Add Person</button>';
+        echo '<button id="user-edit-person" class="btn btn-primary m-1">Edit Person</button>';
+        echo '<button id="user-delete-person" class="btn btn-danger m-1">Delete Person</button>';
+    }

@@ -32,6 +32,21 @@
 
     // Fetch the data
     $row = $result->fetch_assoc();
+    ?>
+
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <title><?php echo isset($row['surname']) ? $row['surname'] : 'Nobel Winner'; ?></title>
+</head>
+<body>
+    
+<?php
+    include "header.php";
 
     if ($row) {
         echo "<p>it works for " . $surname . "</p>";
@@ -42,6 +57,10 @@
         echo "</pre>";
     }
 
+    include "footer.php";
+
     $stmt->close();
     $conn->close();
 ?>
+</body>
+</html>

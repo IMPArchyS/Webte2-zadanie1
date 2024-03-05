@@ -121,4 +121,3 @@
         echo "<td>" . $country_name . "</td>";
         echo "</tr>";
     }
-?>

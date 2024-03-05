@@ -5,18 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <title>Nobelove Ceny</title>
 </head>
 <body>
+
 <?php
+    session_start();
     require "php/options.php";
     require "php/functions.php";
     include "php/header.php";
 
+
     /// connect to DB
     $mysqli = createMySqlConnection();
 
+    echo '<a href="php/restricted.php">Restricted Page</a>';
+    //createPersonButtons();
     /// filters
     $page = isset($_GET['page']) ? $_GET['page'] : 1;
     $itemsPerPage = isset($_GET['itemsPerPage']) ? $_GET['itemsPerPage'] : 10;
@@ -70,12 +76,12 @@
 
     /// Close connection
     $mysqli->close();
-
     include "php/footer.php";
 ?>
 <script src="js/sort.js"></script>
 <script src="js/yearsSort.js"></script>
 <script src="js/categorySort.js"></script>
 <script src="js/itemsPerPage.js"></script>
+<script src="js/util.js"></script>
 </body>
 </html>
