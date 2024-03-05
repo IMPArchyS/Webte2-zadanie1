@@ -16,20 +16,24 @@
         <h1>Register</h1>
         <form method="POST" action="register.php" id="loginForm">
             <div class="form-group">
-                <label for="firstname">First Name</label>
-                <input type="text" class="form-control" id="firstname" name="firstname" required value="<?php echo isset($_POST['firstname']) ? htmlspecialchars($_POST['firstname']) : ''; ?>">
+                <label for="firstname">*First Name</label>
+                <input type="text" class="form-control" id="firstname" name="firstname" value="<?php echo isset($_POST['firstname']) ? htmlspecialchars($_POST['firstname']) : ''; ?>">
+                <p id="firstnameError" class="text-danger d-none">This field is required</p>
             </div>
             <div class="form-group">
-                <label for="lastname">Last Name</label>
-                <input type="text" class="form-control" id="lastname" name="lastname" required value="<?php echo isset($_POST['lastname']) ? htmlspecialchars($_POST['lastname']) : ''; ?>">
+                <label for="lastname">*Last Name</label>
+                <input type="text" class="form-control" id="lastname" name="lastname" value="<?php echo isset($_POST['lastname']) ? htmlspecialchars($_POST['lastname']) : ''; ?>">
+                <p id="lastnameError" class="text-danger d-none">This field is required</p>
             </div>
             <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" name="email" required value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>">
+                <label for="email">*Email</label>
+                <input type="email" class="form-control" id="email" name="email" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>">
+                <p id="emailError" class="text-danger d-none">Invalid email</p>
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="password" required>
+                <label for="password">*Password</label>
+                <input type="password" class="form-control" id="password" name="password">
+                <p id="passwordError" class="text-danger d-none">This field is required</p>
             </div>
             <button type="submit" class="btn btn-primary">Login</button>
         </form>
@@ -41,6 +45,7 @@
         include "footer.php";
         ?>
 </body>
+<script src="../js/registerLogic.js"></script>
 </html>
 
 

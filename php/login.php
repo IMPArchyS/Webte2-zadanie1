@@ -19,13 +19,15 @@
             
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" name="email" required value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>">
+                <input type="email" class="form-control" id="email" name="email" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>">
+                <p id="emailError" class="text-danger d-none">Invalid email</p>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="password" required>
+                <input type="password" class="form-control" id="password" name="password">
+                <p id="passwordError" class="text-danger d-none">This field is required</p>
             </div>
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button id="submitLoginButton" type="submit" class="btn btn-primary">Login</button>
         </form>
         <p id="wrongCredentials" class="text-danger d-none">Wrong credentials</p>
         <p>Not registered? <a href="register.php">Register here</a></p>
@@ -35,6 +37,7 @@
         include "footer.php";
     ?>
 </body>
+<script src="../js/loginLogic.js"></script>
 </html>
 
 <?php 
