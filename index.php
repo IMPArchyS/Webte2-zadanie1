@@ -21,7 +21,11 @@
     /// connect to DB
     $mysqli = createMySqlConnection();
 
-    echo '<a href="php/restricted.php">Restricted Page</a>';
+    if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+        echo '<p>Nie ste prihlaseny</p>';
+    } else {
+        echo '<a href="php/restricted.php">Zabezpecena stranka</a>';
+    }
     //createPersonButtons();
     /// filters
     $page = isset($_GET['page']) ? $_GET['page'] : 1;

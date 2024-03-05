@@ -12,8 +12,6 @@
                             echo '<li class="nav-item">
                                     <a class="btn btn-primary" href="php/login.php" id="login">Login</a>
                                     </li>';
-                            echo '<li class="nav-item">
-                                    <p>Nie ste prihlaseny</p> </li>';
                         } else {
                             // Prihlaseny pouzivatel, zobraz odkaz na zabezpecenu stranku.
                             createLogoutButton();

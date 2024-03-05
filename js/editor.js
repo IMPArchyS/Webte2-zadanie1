@@ -26,4 +26,18 @@ $(function () {
     modalCloseButton.on('click', function () {
         $('#editPersonModal').modal('hide');
     });
+
+    // Fetch the button with id #logout
+    var logoutButton = $('#user-logout');
+
+    // Add a click event listener to the button
+    logoutButton.on('click', function () {
+        $.ajax({
+            type: 'POST',
+            url: 'logout.php',
+            success: function () {
+                window.location.href = '/';
+            },
+        });
+    });
 });
