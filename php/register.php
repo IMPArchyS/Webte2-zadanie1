@@ -122,23 +122,42 @@
                     $userSecret = $g2fa->createSecret();
                     $codeURL = $g2fa->getQRCodeGoogleUrl($email, $userSecret);
             
-                    $qrcode = createUser($firstName, $lastName, $email, $hashedPassword, $userSecret, $codeURL);
-                    
+                    // $qrcode = createUser($firstName, $lastName, $email, $hashedPassword, $userSecret, $codeURL);
+                    session_start();
+                    $_SESSION["firstname"] = $firstName;
+                    $_SESSION["lastname"] = $lastName;
+                    $_SESSION["email"] = $email;
+                    $_SESSION["password"] = $hashedPassword;
+                    $_SESSION["2faSecret"] = $userSecret;
+                    $_SESSION["2faURL"] = $codeURL;
+
                     $_SESSION["user_id"] = $firstName;
-                    //$_SESSION["loggedin"] = true;
+                    $_SESSION["regHalf"] = true;
                     
                     // Redirect to a success page
-                    //header("Location: /");
+                    header("Location: auth.php");
                 }
             }
             
-            if (isset($qrcode)) {
+            /*if (isset($qrcode)) {
                 // Pokial bol vygenerovany QR kod po uspesnej registracii, zobraz ho.
-                $message = '<p>Naskenujte QR kod do aplikacie Authenticator pre 2FA: <br><img src="'.$qrcode.'" alt="qr kod pre aplikaciu authenticator"></p>';
-                
+
+                $message = '<div class="container">
+                                <div class="row">
+                                    <div class="col-md-6 offset-md-3">
+                                        <div class="card mt-5">
+                                            <div class="card-body text-center">
+                                                <p class="card-text">Naskenujte QR kod do aplikacie Authenticator pre 2FA:</p>
+                                                <img src="'.$qrcode.'" alt="qr kod pre aplikaciu authenticator" class="img-fluid">
+                                                <p class="card-text">Teraz sa mozte prihlasit: <a href="login.php" role="button" class="btn btn-primary">Login</a></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>';
+                                
                 echo $message;
-                echo '<p>Teraz sa mozte prihlasit: <a href="login.php" role="button">Login</a></p>';
-            }
+            }*/
     ?>
     </div>
     <?php 
