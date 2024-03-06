@@ -1,4 +1,9 @@
 <?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $method = $_POST['_method'];
+        echo "Submitted from " . $method;
+}
+
 function insertPersonIntoDB($name, $surname, $organisation, $sex, $birth, $death, $countryName) {
     // Check if the country exists in the database
     $countryId = getCountryIdByName($countryName);

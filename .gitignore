@@ -1,1 +1,9 @@
-**/vendor
+**/vendor/firebase
+**/vendor/guzzlehttp
+**/vendor/monolog
+**/vendor/paragonie
+**/vendor/phpseclib
+**/vendor/psr
+**/vendor/ralouphie
+**/vendor/symfony
+**/vendor/google

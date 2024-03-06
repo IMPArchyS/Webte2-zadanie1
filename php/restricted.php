@@ -22,22 +22,19 @@
     require_once "functions.php";
     include_once "header.php";
 
-    echo "<main>";
+    echo "<main id='mainContainer'>";
 
     createPersonButtons();
-    if (isset($_POST["submit"])) {
-        
-    }
     echo "</main>";
     include_once "footer.php";
 ?>
 
-<div id="feedbackToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+<div id="feedbackToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="toast-header">
-        <strong class="mr-auto">Feedback</strong>
+        <strong id="toastInfo" class="mr-auto">Feedback</strong>
     </div>
-    <div class="toast-body">
-        <!-- Feedback message goes here -->
+    <div id="feedbackToastbody" class="toast-body">
+        <p id="feedbackToastText"></p>
     </div>
 </div>
 

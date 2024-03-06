@@ -5,3 +5,33 @@ a {
 .impError {
     border: 2px solid red !important;
 }
+
+#feedbackToast {
+    position: fixed;
+    left: 50%;
+    top: 5%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 1); /* white background */
+}
+
+.impToastGood {
+    border: 4px solid green;
+    color: green;
+    font-weight: bold; /* make the text bolder */
+}
+
+.impToastGood * {
+    color: green;
+    font-weight: bold; /* make the text bolder */
+}
+
+.impToastBad {
+    border: 4px solid red;
+    color: red;
+    font-weight: bold; /* make the text bolder */
+}
+
+.impToastBad * {
+    color: red;
+    font-weight: bold; /* make the text bolder */
+}
