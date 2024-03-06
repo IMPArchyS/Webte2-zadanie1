@@ -10,7 +10,7 @@
 </head>
 <body>
     <?php 
-        include "regHeader.php";
+        include_once "regHeader.php";
     ?>
 
     <div class="container">
@@ -27,6 +27,11 @@
                 <input type="password" class="form-control" id="password" name="password">
                 <p id="passwordError" class="text-danger d-none">This field is required</p>
             </div>
+            <div class="form-group">
+                <label for="2fa">2FA Code</label>
+                <input type="number" class="form-control" id="2fa" name="2fa">
+                <p id="2faError" class="text-danger d-none">This field is required</p>
+            </div>
             <button id="submitLoginButton" type="submit" class="btn btn-primary">Login</button>
         </form>
         <p id="wrongCredentials" class="text-danger d-none">Wrong credentials</p>
@@ -34,19 +39,21 @@
         
     </div>
     <?php 
-        include "footer.php";
+        include_once "footer.php";
     ?>
 </body>
 <script src="../js/loginLogic.js"></script>
 </html>
 
 <?php 
-require_once "functions.php";
+error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
 
+require_once "functions.php";
+require_once '../vendor/phpgangsta/googleauthenticator/PHPGangsta/GoogleAuthenticator.php';
 session_start();
 
-if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    //header("location: php/restricted.php");
+if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+    header("location: /");
     exit;
 }
 
@@ -78,32 +85,46 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Fetch the user from the database
     $user = getUserByEmail($email);
-    $firstName = $user["first_name"];
-
+    
     if ($user) {
         // The user exists, verify the password
         if (password_verify($password, $user["password"])) {
             // The password is correct, log the user in
-            session_start();
-            $_SESSION["user_id"] = $firstName;
-            $_SESSION["loggedin"] = true;
-            // Redirect to a success page
-            echo "
-            <script>
-            $(function () {
-                $('#loginForm input').removeClass('impError');
-                $('#wrongCredentials').addClass('d-none');
-                
-            });
-            </script>
-            ";
-            header("Location: ../index.php");
-            exit;
+            $g2fa = new PHPGangsta_GoogleAuthenticator();
+
+            if ($g2fa->verifyCode($user["2fa_code"], $_POST['2fa'], 2)) {
+                $firstName = $user["first_name"];
+                $_SESSION["user_id"] = $firstName;
+                $_SESSION["loggedin"] = true;
+                // Redirect to a success page
+                echo "
+                <script>
+                $(function () {
+                    $('#loginForm input').removeClass('impError');
+                    $('#wrongCredentials').addClass('d-none');
+                });
+                </script>
+                ";
+                header("Location: ../index.php");
+                exit;
+            } else {
+                echo "
+                <script>
+                $(function () {
+                    $('#loginForm input').addClass('impError');
+                    $('#wrongCredentials').addClass('d-none');
+                    $('#2faError').removeClass('d-none');
+                    $('#2faError').text('Wrong credentials');
+                });
+                </script>
+                ";
+            }
         } else {
             echo "
             <script>
             $(function () {
                 $('#loginForm input').addClass('impError');
+                $('#wrongCredentials').text('Wrong credentials');
                 $('#wrongCredentials').removeClass('d-none');
             });
             </script>
@@ -115,7 +136,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "
         <script>
         $(function () {
-            $('#loginForm input').addClass('impError');
+            $('#wrongCredentials').text('User does not exist');
             $('#wrongCredentials').removeClass('d-none');
         });
         </script>

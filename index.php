@@ -10,12 +10,11 @@
     <title>Nobelove Ceny</title>
 </head>
 <body>
-
 <?php
     session_start();
-    require "php/options.php";
-    require "php/functions.php";
-    include "php/header.php";
+    require_once "php/options.php";
+    require_once "php/functions.php";
+    include_once "php/header.php";
 
 
     /// connect to DB
@@ -80,7 +79,7 @@
 
     /// Close connection
     $mysqli->close();
-    include "php/footer.php";
+    include_once "php/footer.php";
 ?>
 <script src="js/sort.js"></script>
 <script src="js/yearsSort.js"></script>

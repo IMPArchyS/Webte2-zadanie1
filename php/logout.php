@@ -7,5 +7,5 @@ $_SESSION = array();
 session_unset();
 
 // Presmerovanie na hlavnu stranku.
-header("location: ../index.php");
+header("location: /");
 exit;

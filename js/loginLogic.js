@@ -1,6 +1,7 @@
 $(function () {
     let emailValid = false;
     let passValid = false;
+    let codeValid = false;
 
     $('#email').on('blur', function () {
         const value = $(this).val();
@@ -32,8 +33,22 @@ $(function () {
             passValid = true;
         }
     });
+
+    $('#2fa').on('blur', function () {
+        const value = $(this).val();
+        if (value === '') {
+            $(this).addClass('impError');
+            $('#2faError').removeClass('d-none');
+            codeValid = false;
+        } else {
+            $(this).removeClass('impError');
+            $('#2faError').addClass('d-none');
+            codeValid = true;
+        }
+    });
+
     $('form').on('submit', function (event) {
-        if (!emailValid || !passValid) {
+        if (!emailValid || !passValid || !codeValid) {
             event.preventDefault();
             if (!passValid) {
                 $('#password').addClass('impError');
@@ -42,6 +57,10 @@ $(function () {
             if (!emailValid) {
                 $('#email').addClass('impError');
                 $('#emailError').removeClass('d-none');
+            }
+            if (!codeValid) {
+                $('#2fa').addClass('impError');
+                $('#2faError').removeClass('d-none');
             }
         }
     });

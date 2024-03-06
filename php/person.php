@@ -1,4 +1,7 @@
 <?php
+    session_start();
+    require "options.php";
+
     $servername = "localhost";
     $username = "imp";
     $password = "vmko";
@@ -63,4 +66,19 @@
     $conn->close();
 ?>
 </body>
+<script>
+    // Fetch the button with id #logout
+    var logoutButton = $('#user-logout');
+
+    // Add a click event listener to the button
+    logoutButton.on('click', function () {
+        $.ajax({
+            type: 'POST',
+            url: 'logout.php',
+            success: function () {
+                window.location.href = '/';
+            },
+        });
+    });
+</script>
 </html>

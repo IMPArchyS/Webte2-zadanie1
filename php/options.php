@@ -60,7 +60,7 @@
     }
 
     function createLogoutButton() : void {
-        echo '<button id="user-logout" class="btn btn-primary">Logout</button>';
+        echo '<li><button id="user-logout" class="btn btn-primary">Logout</button> </li>';
     }
 
     function createPersonButtons() : void {

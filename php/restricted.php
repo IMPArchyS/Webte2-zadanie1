@@ -19,8 +19,8 @@
     }
     
     require_once "options.php";
-    require "functions.php";
-    include "header.php";
+    require_once "functions.php";
+    include_once "header.php";
 
     echo "<main>";
 
@@ -29,7 +29,7 @@
         
     }
     echo "</main>";
-    include "footer.php";
+    include_once "footer.php";
 ?>
 
 <div id="feedbackToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">

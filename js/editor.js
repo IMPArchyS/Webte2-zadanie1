@@ -40,4 +40,12 @@ $(function () {
             },
         });
     });
+
+    setInterval(function () {
+        $.get('checkLogin.php', function (data) {
+            if (data == 'not_logged_in') {
+                location.reload();
+            }
+        });
+    }, 1000);
 });
