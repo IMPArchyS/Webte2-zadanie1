@@ -4,6 +4,12 @@ $(function () {
     let emailValid = false;
     let passValid = false;
 
+    $('#firstname').trigger('blur');
+    $('#lastname').trigger('blur');
+    $('#email').trigger('blur');
+    $('#password').trigger('blur');
+    $('#2fa').trigger('blur');
+
     $('#firstname').on('blur', function () {
         const value = $(this).val();
         if (value === '') {
@@ -62,6 +68,12 @@ $(function () {
     });
 
     $('form').on('submit', function (event) {
+        $('#firstname').trigger('blur');
+        $('#lastname').trigger('blur');
+        $('#email').trigger('blur');
+        $('#password').trigger('blur');
+        $('#2fa').trigger('blur');
+
         if (!emailValid || !passValid || !firstnameValid || !lastnameValid) {
             event.preventDefault();
             if (!firstnameValid) {

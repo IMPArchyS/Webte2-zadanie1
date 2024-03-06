@@ -3,6 +3,10 @@ $(function () {
     let passValid = false;
     let codeValid = false;
 
+    $('#email').trigger('blur');
+    $('#password').trigger('blur');
+    $('#2fa').trigger('blur');
+
     $('#email').on('blur', function () {
         const value = $(this).val();
         const emailRegex = /^[^\.\s][\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -48,6 +52,10 @@ $(function () {
     });
 
     $('form').on('submit', function (event) {
+        $('#email').trigger('blur');
+        $('#password').trigger('blur');
+        $('#2fa').trigger('blur');
+
         if (!emailValid || !passValid || !codeValid) {
             event.preventDefault();
             if (!passValid) {
