@@ -21,7 +21,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         'genre_en' => $_POST['genre_en'],
         'genre_sk' => $_POST['genre_sk']
     ];
-        
+    if (!checkInfo()) {
+        echo "fail";
+    }
+    
     switch (insertPersonIntoDB($result, $dbconfig)) {
         case 0:
             echo "person exists";
@@ -264,4 +267,8 @@ function convertCategory($category) {
             break;
     }
     return $slovakCategory;
+}
+
+function checkInfo() {
+    
 }

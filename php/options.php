@@ -63,10 +63,3 @@
     function createLogoutButton() : void {
         echo '<li><button id="user-logout" class="btn btn-primary">Logout</button> </li>';
     }
-
-    function createPersonButtons() : void {
-        echo "<form id='sendFormData' action='post'>";
-        echo '<button id="user-edit-person" class="btn btn-primary m-1">Edit Person</button>';
-        echo '<button id="user-delete-person" class="btn btn-danger m-1">Delete Person</button>';
-        echo "</form>";
-    }

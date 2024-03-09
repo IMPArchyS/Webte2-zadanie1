@@ -421,6 +421,11 @@ $(function () {
                         $('#feedbackToast').addClass('impToastGood');
                         $('#feedbackToast').removeClass('impToastBad');
                         $('#toastInfo').text('SUCCESS');
+                    } else if (response === 'fail') {
+                        $('#toastInfo').text('FAILURE');
+                        $('#feedbackToastText').text('INVALID PERSON INFORMATION');
+                        $('#feedbackToast').removeClass('impToastGood');
+                        $('#feedbackToast').addClass('impToastBad');
                     } else {
                         $('#toastInfo').text('FAILURE');
                         $('#feedbackToastText').text('COULDNT INSERT');

@@ -10,7 +10,7 @@
     $surname = isset($_GET['surname']) ? $_GET['surname'] : '';
 
     // Prepare and bind
-    $stmt = $conn->prepare("SELECT persons.*, countries.name as countryName, prizes.*, prize_details.* 
+    $stmt = $conn->prepare("SELECT persons.id as personID, persons.*, countries.name as countryName, prizes.*, prize_details.* 
                             FROM persons 
                             LEFT JOIN countries ON persons.country_id = countries.id 
                             LEFT JOIN prizes ON persons.id = prizes.person_id
@@ -45,6 +45,8 @@
 <?php
     include_once "header.php";
 
+    $personId = $row['personID'];
+
     if ($row) {
         echo "<p>it works for " . $surname . "</p>";
 
@@ -55,12 +57,17 @@
     }
 
     if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-        createPersonButtons();
+        echo "<form id='sendFormData' action='post'>";
+        echo '<button id="user-edit-person" class="btn btn-primary m-1">Edit Person</button>';
+        echo "<button id='user-delete-person' class='btn btn-danger m-1' data-person-id=" . $personId . ">Delete Person</button>";
+        echo "</form>";
     }
     include_once "footer.php";
 
     $stmt->close();
     $conn->close();
+
+    echo "<script>const personId = '$personId';</script>";
 ?>
 <div id="feedbackToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="toast-header">
