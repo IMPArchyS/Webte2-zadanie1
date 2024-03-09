@@ -1,24 +1,16 @@
 <?php
     session_start();
-    require "options.php";
-
-    $servername = "localhost";
-    $username = "imp";
-    $password = "vmko";
-    $dbname = "nobel_prizes";
+    require_once "options.php";
+    require_once "functions.php";
+    require_once "../config.php";
 
     // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+    $conn = fnc\createMySqlConnection($dbconfig);
 
     $surname = isset($_GET['surname']) ? $_GET['surname'] : '';
 
     // Prepare and bind
-    $stmt = $conn->prepare("SELECT persons.*, countries.name, prizes.*, prize_details.* 
+    $stmt = $conn->prepare("SELECT persons.*, countries.name as countryName, prizes.*, prize_details.* 
                             FROM persons 
                             LEFT JOIN countries ON persons.country_id = countries.id 
                             LEFT JOIN prizes ON persons.id = prizes.person_id
@@ -35,21 +27,23 @@
 
     // Fetch the data
     $row = $result->fetch_assoc();
-    ?>
+?>
 
 <!DOCTYPE html>
 <html lang="sk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <title><?php echo isset($row['surname']) ? $row['surname'] : 'Nobel Winner'; ?></title>
 </head>
 <body>
-    
+
 <?php
-    include "header.php";
+    include_once "header.php";
 
     if ($row) {
         echo "<p>it works for " . $surname . "</p>";
@@ -60,25 +54,27 @@
         echo "</pre>";
     }
 
-    include "footer.php";
+    if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+        createPersonButtons();
+    }
+    include_once "footer.php";
 
     $stmt->close();
     $conn->close();
 ?>
+<div id="feedbackToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+        <strong id="toastInfo" class="mr-auto">Feedback</strong>
+    </div>
+    <div id="feedbackToastbody" class="toast-body">
+        <p id="feedbackToastText"></p>
+    </div>
+</div>  
 </body>
+<script src="../js/person.js"></script>
 <script>
-    // Fetch the button with id #logout
-    var logoutButton = $('#user-logout');
-
-    // Add a click event listener to the button
-    logoutButton.on('click', function () {
-        $.ajax({
-            type: 'POST',
-            url: 'logout.php',
-            success: function () {
-                window.location.href = '/';
-            },
-        });
+    $("#user-logout").on("click", function () {
+        window.location.href = "logout.php";
     });
 </script>
 </html>

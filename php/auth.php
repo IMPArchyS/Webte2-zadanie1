@@ -15,30 +15,13 @@
     error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
 
     require_once "functions.php";
+    require_once "../config.php";
     require_once '../vendor/phpgangsta/googleauthenticator/PHPGangsta/GoogleAuthenticator.php';
 
     session_start();
 
-    function createUser($firstName, $lastName, $email, $hashedPassword, $userSecret, $codeURL) {
-        // Database connection details
-        $conn = createMySqlConnection();
-    
-        // Prepare the SQL statement
-        $stmt = $conn->prepare('INSERT INTO users (first_name, last_name, email, password, 2fa_code) VALUES (?, ?, ?, ?, ?)');
-    
-        // Bind the parameters to the SQL statement
-        $stmt->bind_param('sssss', $firstName, $lastName, $email, $hashedPassword, $userSecret);
-    
-        // Execute the SQL statement
-        if ($stmt->execute()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    
     if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-        header("location: /");
+        header("location: ../index.php");
         exit;
     }
 
@@ -85,7 +68,7 @@
             $password = $_SESSION["password"];
             $codeURL = $_SESSION["2faURL"];
     
-            if(createUser($firstName, $lastName, $email, $password, $userSecret, $codeURL)) {
+            if(fnc\createUser($firstName, $lastName, $email, $password, $userSecret, $codeURL, $dbconfig)) {
                 echo "
                 <script>
                 $(function () {

@@ -15,10 +15,13 @@
     require_once "php/options.php";
     require_once "php/functions.php";
     include_once "php/header.php";
+    include_once "config.php";
 
 
     /// connect to DB
-    $mysqli = createMySqlConnection();
+    //$mysqli = new mysqli($dbconfig['hostname'], $dbconfig['username'], $dbconfig['password'], $dbconfig['dbname']);
+    $mysqli = fnc\createMySqlConnection($dbconfig);
+
 
     if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         echo '<p>Nie ste prihlaseny</p>';
@@ -35,14 +38,16 @@
     $order = isset($_GET['order']) ? $_GET['order'] : null; // Default sort order
     $year = isset($_GET['year']) ? $_GET['year'] : null; // Default year filter
     $category = isset($_GET['category']) ? $_GET['category'] : null; // Default category filter
+
+    $sql_count = "SELECT COUNT(*) as total FROM persons";
+    $totalItems = fnc\getCount($year, $category, $dbconfig);
+    if ($itemsPerPage === 'all') $itemsPerPage = $totalItems;
+    $totalPages = ceil($totalItems / $itemsPerPage);
     
     $offset = ($page - 1) * $itemsPerPage;
-    $sql_count = "SELECT COUNT(*) as total FROM persons";
     $result_count = $mysqli->query($sql_count);
     $row_count = $result_count->fetch_assoc();
     //$totalItems = $row_count['total'];
-    $totalItems = getCount($year, $category);
-    $totalPages = ceil($totalItems / $itemsPerPage);
 
     // Ensure $sort and $order contain valid values
     $allowed_sort_fields = ['surname', 'year', 'category'];
@@ -58,7 +63,7 @@
     $offset = ($page - 1) * $itemsPerPage;
     
     /// SQL query
-    $sql = createSqlQuery($sort, $order, $itemsPerPage, $offset, $year, $category);
+    $sql = fnc\createSqlQuery($sort, $order, $itemsPerPage, $offset, $year, $category);
     $result = $mysqli->query($sql);
     
     /// table
@@ -70,11 +75,11 @@
     if ($result->num_rows > 0) {
         // Fetch and display data of each row
         while($row = $result->fetch_assoc()) {
-            createTableRow($row);
+            fnc\createTableRow($row);
         }
     }
     echo "</table>";
-    createPagination($page, $totalPages, $itemsPerPage, $sort, $order, $year, $category);
+    fnc\createPagination($page, $totalPages, $itemsPerPage, $sort, $order, $year, $category);
     echo "</section>";
 
     /// Close connection

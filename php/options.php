@@ -9,6 +9,7 @@
         echo "<option value='10'" . ($itemsPerPage == 10 ? " selected" : "") . ">10</option>";
         echo "<option value='20'" . ($itemsPerPage == 20 ? " selected" : "") . ">20</option>";
         echo "<option value='30'" . ($itemsPerPage == 30 ? " selected" : "") . ">30</option>";
+        echo "<option value='all'" . ($itemsPerPage > 30 ? " selected" : "") . ">All</option>";
         echo "</select>";
         echo "</div>";
 
@@ -64,7 +65,8 @@
     }
 
     function createPersonButtons() : void {
-        echo '<button id="user-add-person" class="btn btn-primary m-1">Add Person</button>';
+        echo "<form id='sendFormData' action='post'>";
         echo '<button id="user-edit-person" class="btn btn-primary m-1">Edit Person</button>';
         echo '<button id="user-delete-person" class="btn btn-danger m-1">Delete Person</button>';
+        echo "</form>";
     }

@@ -49,42 +49,23 @@
 error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
 
 require_once "functions.php";
+require_once "../config.php";
 require_once '../vendor/phpgangsta/googleauthenticator/PHPGangsta/GoogleAuthenticator.php';
 session_start();
 
 if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    header("location: /");
+    header("location: ../index.php");
     exit;
 }
 
-function getUserByEmail($email) {
-    // Database connection details
-    $conn = createMySqlConnection();
 
-    // Prepare the SQL statement
-    $stmt = $conn->prepare('SELECT * FROM users WHERE email = ?');
-
-    // Bind the email to the SQL statement
-    $stmt->bind_param('s', $email);
-
-    // Execute the SQL statement
-    $stmt->execute();
-
-    // Get the result of the query
-    $result = $stmt->get_result();
-
-    // Fetch the user data
-    $user = $result->fetch_assoc();
-
-    return $user;
-}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $password = $_POST["password"];
 
     // Fetch the user from the database
-    $user = getUserByEmail($email);
+    $user = fnc\getUserByEmail($email, $dbconfig);
     
     if ($user) {
         // The user exists, verify the password

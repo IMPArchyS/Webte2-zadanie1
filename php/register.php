@@ -45,51 +45,13 @@
     error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
             
             require_once "functions.php";
+            require_once "../config.php";
             require_once '../vendor/phpgangsta/googleauthenticator/PHPGangsta/GoogleAuthenticator.php';
             
-            function createUser($firstName, $lastName, $email, $hashedPassword, $userSecret, $codeURL) {
-                // Database connection details
-                $conn = createMySqlConnection();
-            
-                // Prepare the SQL statement
-                $stmt = $conn->prepare('INSERT INTO users (first_name, last_name, email, password, 2fa_code) VALUES (?, ?, ?, ?, ?)');
-            
-                // Bind the parameters to the SQL statement
-                $stmt->bind_param('sssss', $firstName, $lastName, $email, $hashedPassword, $userSecret);
-            
-                // Execute the SQL statement
-                if ($stmt->execute()) {
-                    $qrcode = $codeURL;
-                    return $qrcode;
-                } else {
-                    echo "error";
-                }
-            }
-            
-            function getUserByEmail($email) {
-                // Database connection details
-                $conn = createMySqlConnection();
-            
-                // Prepare the SQL statement
-                $stmt = $conn->prepare('SELECT * FROM users WHERE email = ?');
-            
-                // Bind the email to the SQL statement
-                $stmt->bind_param('s', $email);
-            
-                // Execute the SQL statement
-                $stmt->execute();
-            
-                // Get the result of the query
-                $result = $stmt->get_result();
-            
-                // Fetch the user data
-                $user = $result->fetch_assoc();
-            
-                return $user;
-            }
-            
-            if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-                header("location: /");
+            session_start();
+
+            if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+                header("location: ../index.php");
                 exit;
             }
             
@@ -100,7 +62,7 @@
                 $password = $_POST["password"];
             
                 // Fetch the user from the database
-                $user = getUserByEmail($email);
+                $user = fnc\getUserByEmail($email, $dbconfig);
             
                 if ($user) {
                     // The user exists, show an error message
@@ -123,7 +85,6 @@
                     $codeURL = $g2fa->getQRCodeGoogleUrl($email, $userSecret);
             
                     // $qrcode = createUser($firstName, $lastName, $email, $hashedPassword, $userSecret, $codeURL);
-                    session_start();
                     $_SESSION["firstname"] = $firstName;
                     $_SESSION["lastname"] = $lastName;
                     $_SESSION["email"] = $email;
@@ -138,26 +99,6 @@
                     header("Location: auth.php");
                 }
             }
-            
-            /*if (isset($qrcode)) {
-                // Pokial bol vygenerovany QR kod po uspesnej registracii, zobraz ho.
-
-                $message = '<div class="container">
-                                <div class="row">
-                                    <div class="col-md-6 offset-md-3">
-                                        <div class="card mt-5">
-                                            <div class="card-body text-center">
-                                                <p class="card-text">Naskenujte QR kod do aplikacie Authenticator pre 2FA:</p>
-                                                <img src="'.$qrcode.'" alt="qr kod pre aplikaciu authenticator" class="img-fluid">
-                                                <p class="card-text">Teraz sa mozte prihlasit: <a href="login.php" role="button" class="btn btn-primary">Login</a></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>';
-                                
-                echo $message;
-            }*/
     ?>
     </div>
     <?php 

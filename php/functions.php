@@ -1,15 +1,10 @@
 <?php
+namespace fnc;
 
-    function createMySqlConnection() : mysqli {
-        $servername = "localhost";
-        $username = "imp";
-        $password = "vmko";
-        $database = "nobel_prizes";
+    function createMySqlConnection($config) : ?\mysqli {
+
+        $mysqli = new \mysqli($config['hostname'], $config['username'], $config['password'], $config['dbname']);
         
-        // Create connection
-        $mysqli = new mysqli($servername, $username, $password, $database);
-        
-        // Check connection
         if ($mysqli->connect_error) {
             return null;
             die("Connection failed: " . $mysqli->connect_error);
@@ -54,7 +49,7 @@
         return $sql;
     }
 
-    function getCount($year, $category) : int {
+    function getCount($year, $category, $config) : int {
         $sql = "SELECT COUNT(*) AS count
                 FROM persons
                 LEFT JOIN countries ON persons.country_id = countries.id
@@ -68,7 +63,7 @@
             $sql .= " WHERE prizes.category = '$category'";
         }
 
-        $result = createMySqlConnection()->query($sql);
+        $result = createMySqlConnection($config)->query($sql);
         $count = $result->fetch_assoc()['count'];
 
         return $count;
@@ -120,4 +115,46 @@
         echo "<td>" . $organisation . "</td>";
         echo "<td>" . $country_name . "</td>";
         echo "</tr>";
+    }
+
+    /// USER MANAGEMENT :
+    
+    function createUser($firstName, $lastName, $email, $hashedPassword, $userSecret, $codeURL, $config) {
+        // Database connection details
+        $conn = createMySqlConnection($config);
+    
+        // Prepare the SQL statement
+        $stmt = $conn->prepare('INSERT INTO users (first_name, last_name, email, password, 2fa_code) VALUES (?, ?, ?, ?, ?)');
+    
+        // Bind the parameters to the SQL statement
+        $stmt->bind_param('sssss', $firstName, $lastName, $email, $hashedPassword, $userSecret);
+    
+        // Execute the SQL statement
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function getUserByEmail($email, $config) {
+        // Database connection details
+        $conn = createMySqlConnection($config);
+    
+        // Prepare the SQL statement
+        $stmt = $conn->prepare('SELECT * FROM users WHERE email = ?');
+    
+        // Bind the email to the SQL statement
+        $stmt->bind_param('s', $email);
+    
+        // Execute the SQL statement
+        $stmt->execute();
+    
+        // Get the result of the query
+        $result = $stmt->get_result();
+    
+        // Fetch the user data
+        $user = $result->fetch_assoc();
+    
+        return $user;
     }
