@@ -23,9 +23,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         'genre_sk' => $_POST['genre_sk']
     ];
 
-    /*if (!checkInfo()) {
+    if (!dbs\checkInfo($result)) {
         echo "fail";
-    }*/
+        exit();
+    }
     
     switch (insertPersonIntoDB($result, $dbconfig)) {
         case 0:

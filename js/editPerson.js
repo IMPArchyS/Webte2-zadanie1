@@ -237,17 +237,6 @@ $(function () {
         $('#genre_en').trigger('blur');
         $('#genre_sk').trigger('blur');
 
-        console.log('nameValid: ' + nameValid);
-        console.log('surValid: ' + surValid);
-        console.log('orgValid: ' + orgValid);
-        console.log('sexValid: ' + sexValid);
-        console.log('bdayValid: ' + bdayValid);
-        console.log('countryValid: ' + countryValid);
-
-        console.log('yearValid: ' + yearValid);
-        console.log('conEN: ' + conEN);
-        console.log('conSK: ' + conSK);
-
         let name = $('#name').val();
         let surname = $('#surname').val();
         let sex = $('#sex').val();
@@ -263,6 +252,22 @@ $(function () {
         let language_sk = $('#language_sk').val();
         let genre_en = $('#genre_en').val();
         let genre_sk = $('#genre_sk').val();
+
+        console.log('name:', name);
+        console.log('surname:', surname);
+        console.log('sex:', sex);
+        console.log('org:', org);
+        console.log('birth:', birth);
+        console.log('death:', death);
+        console.log('country:', country);
+        console.log('year:', year);
+        console.log('category:', category);
+        console.log('contribution_en:', contribution_en);
+        console.log('contribution_sk:', contribution_sk);
+        console.log('language_en:', language_en);
+        console.log('language_sk:', language_sk);
+        console.log('genre_en:', genre_en);
+        console.log('genre_sk:', genre_sk);
 
         $.ajax({
             type: 'POST',
@@ -295,6 +300,12 @@ $(function () {
                     $('#feedbackToast').addClass('impToastGood');
                     $('#feedbackToast').removeClass('impToastBad');
                     $('#toastInfo').text('SUCCESS');
+                    $('#editPersonModal').modal('hide');
+                    $('#feedbackToast').toast('show');
+                    setTimeout(function () {
+                        $('#feedbackToast').toast('hide');
+                        window.location.href = window.location.href.split('?')[0] + '?surname=' + surname;
+                    }, 2000);
                 } else if (response === 'fail') {
                     $('#toastInfo').text('FAILURE');
                     $('#feedbackToastText').text('INVALID PERSON INFORMATION');

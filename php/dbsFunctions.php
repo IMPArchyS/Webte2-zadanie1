@@ -191,7 +191,39 @@ function getSQLbyEntry($entryType) {
             return "";
     }
 }
+/*
+$result = [
+    'name' => $_POST['name'],
+    'surname' => $_POST['surname'],
+    'sex' => $_POST['sex'],
+    'org' => $_POST['org'],
+    'birth' => $_POST['birth'],
+    'death' => $_POST['death'],
+    'country' => $_POST['country'],
+    'year' => $_POST['year'],
+    'category' => $_POST['category'],
+    'contribution_en' => $_POST['contribution_en'],
+    'contribution_sk' => $_POST['contribution_sk'],
+    'language_en' => $_POST['language_en'],
+    'language_sk' => $_POST['language_sk'],
+    'genre_en' => $_POST['genre_en'],
+    'genre_sk' => $_POST['genre_sk']
+];
+*/
+function checkInfo($info) {
+    if (strlen($info["name"]) > 254) return false;
+    if (strlen($info["surname"]) > 254) return false;
+    if (strlen($info["org"]) > 254) return false;
+    if ((int)($info["birth"]) < 0 || (int)($info["birth"]) > 9999) return false;
+    if ((int)($info["death"]) < 0 || (int)($info["death"]) > 9999) return false;
 
-function checkInfo() {
-    
+    if ((int)($info["year"]) < 0 || (int)($info["year"]) > 9999) return false;
+    if (strlen($info["category"]) > 254) return false;
+
+    if (strlen($info["language_en"]) > 254) return false;
+    if (strlen($info["language_sk"]) > 254) return false;
+    if (strlen($info["genre_en"]) > 254) return false;
+    if (strlen($info["genre_sk"]) > 254) return false;
+
+    return true;
 }

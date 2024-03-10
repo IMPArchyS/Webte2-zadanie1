@@ -326,7 +326,7 @@ $(function () {
                 location.reload();
             }
         });
-    }, 1000);
+    }, 7000);
 
     $('#sendFormData').on('submit', function (event) {
         event.preventDefault();
