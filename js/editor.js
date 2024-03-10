@@ -57,18 +57,18 @@ $(function () {
         if (name === '') {
             $(this).addClass('impError');
             nameValid = false;
-            $('#nameError').removeClass('d-none').text('Name is required');
+            $('#nameError').text('Meno je povinné');
         } else if (!nameRegex.test(name)) {
             $(this).addClass('impError');
             nameValid = false;
-            $('#nameError').removeClass('d-none').text('Invalid name');
+            $('#nameError').text('Neplatné meno');
         } else {
             $(this).removeClass('impError');
             nameValid = true;
-            $('#nameError').addClass('d-none').text('');
+            $('#nameError').text('');
 
             $('#organisation').removeClass('impError');
-            $('#organisationError').addClass('d-none').text('');
+            $('#organisationError').text('');
         }
     });
 
@@ -79,18 +79,18 @@ $(function () {
         if (surname === '') {
             $(this).addClass('impError');
             surValid = false;
-            $('#surnameError').removeClass('d-none').text('Surname is required');
+            $('#surnameError').text('Priezvisko je povinné');
         } else if (!nameRegex.test(surname)) {
             $(this).addClass('impError');
             surValid = false;
-            $('#surnameError').removeClass('d-none').text('Invalid surname');
+            $('#surnameError').text('Neplatné priezvisko');
         } else {
             $(this).removeClass('impError');
             surValid = true;
-            $('#surnameError').addClass('d-none').text('');
+            $('#surnameError').text('');
 
             $('#organisation').removeClass('impError');
-            $('#organisationError').addClass('d-none').text('');
+            $('#organisationError').text('');
         }
     });
 
@@ -99,15 +99,15 @@ $(function () {
         if (sex === '') {
             $(this).addClass('impError');
             sexValid = false;
-            $('#sexError').removeClass('d-none').text('Sex is required');
+            $('#sexError').text('Pohlavie je povinné');
         } else if (!nameRegex.test(sex)) {
             $(this).addClass('impError');
             sexValid = false;
-            $('#sexError').removeClass('d-none').text('Invalid sex');
+            $('#sexError').text('Neplatné pohlavie');
         } else {
             $(this).removeClass('impError');
             sexValid = true;
-            $('#sexError').addClass('d-none').text('');
+            $('#sexError').text('');
         }
     });
 
@@ -117,16 +117,16 @@ $(function () {
         let org = $(this).val();
         if (org === '') {
             orgValid = false;
-            $('#organisationError').removeClass('d-none').text('No name & surname Organisation is required');
+            $('#organisationError').text('povinné ak nie je zadané meno+priezvisko');
             $(this).addClass('impError');
         } else {
             $(this).removeClass('impError');
-            $('#organisationError').addClass('d-none').text('');
+            $('#organisationError').text('');
             orgValid = true;
             $('#name').removeClass('impError');
-            $('#nameError').addClass('d-none').text('');
+            $('#nameError').text('');
             $('#surname').removeClass('impError');
-            $('#surnameError').addClass('d-none').text('');
+            $('#surnameError').text('');
         }
     });
 
@@ -136,20 +136,20 @@ $(function () {
         if (birth === '') {
             $(this).addClass('impError');
             bdayValid = false;
-            $('#birthError').removeClass('d-none').text('Birth is required');
+            $('#birthError').text('Narodenie je povinné');
         } else if (!numberRegex.test(birth)) {
             $(this).addClass('impError');
             bdayValid = false;
-            $('#birthError').removeClass('d-none').text('Invalid date');
+            $('#birthError').text('Neplatný rok');
         } else {
             $(this).removeClass('impError');
             bdayValid = true;
-            $('#birthError').addClass('d-none').text('');
+            $('#birthError').text('');
         }
         if (nobelYear != 0 && bday > nobelYear) {
             $('#year').addClass('impError');
             yearValid = false;
-            $('#yearError').removeClass('d-none').text('Invalid date');
+            $('#yearError').text('Neplatný rok');
         }
         $('#year').trigger('blur');
     });
@@ -164,15 +164,15 @@ $(function () {
         if (!numberRegex.test(death)) {
             $(this).addClass('impError');
             deathValid = false;
-            $('#deathError').removeClass('d-none').text('Invalid date');
+            $('#deathError').text('Neplatný rok');
         } else if (bday > death) {
             $(this).addClass('impError');
             deathValid = false;
-            $('#deathError').removeClass('d-none').text('Invalid date');
+            $('#deathError').text('Neplatný rok');
         } else {
             $(this).removeClass('impError');
             deathValid = true;
-            $('#deathError').addClass('d-none').text('');
+            $('#deathError').text('');
         }
     });
 
@@ -181,15 +181,15 @@ $(function () {
         if (country === '') {
             $(this).addClass('impError');
             countryValid = false;
-            $('#countryError').removeClass('d-none').text('Country is required');
+            $('#countryError').text('Krajina je povinná');
         } else if (!nameRegex.test(country)) {
             $(this).addClass('impError');
             countryValid = false;
-            $('#countryError').removeClass('d-none').text('Invalid country');
+            $('#countryError').text('Neplatná krajina');
         } else {
             $(this).removeClass('impError');
             countryValid = true;
-            $('#countryError').addClass('d-none').text('');
+            $('#countryError').text('');
         }
     });
 
@@ -200,15 +200,15 @@ $(function () {
         if (year === '') {
             $(this).addClass('impError');
             yearValid = false;
-            $('#yearError').removeClass('d-none').text('Year is required');
+            $('#yearError').text('Rok je povinný');
         } else if (!numberRegex.test(year) || year < bday) {
             $(this).addClass('impError');
             yearValid = false;
-            $('#yearError').removeClass('d-none').text('Invalid date');
+            $('#yearError').text('Neplatný rok');
         } else {
             $(this).removeClass('impError');
             yearValid = true;
-            $('#yearError').addClass('d-none').text('');
+            $('#yearError').text('');
         }
     });
 
@@ -221,11 +221,11 @@ $(function () {
         if (contributionText === '') {
             $(this).addClass('impError');
             conEN = false;
-            $('#contribution_enError').removeClass('d-none').text('Contribution is required');
+            $('#contribution_enError').text('Príspevok je povinný');
         } else {
             $(this).removeClass('impError');
             conEN = true;
-            $('#contribution_enError').addClass('d-none').text('');
+            $('#contribution_enError').text('');
         }
     });
 
@@ -234,11 +234,11 @@ $(function () {
         if (contributionText === '') {
             $(this).addClass('impError');
             conSK = false;
-            $('#contribution_skError').removeClass('d-none').text('Contribution is required');
+            $('#contribution_skError').text('Príspevok je povinný');
         } else {
             $(this).removeClass('impError');
             conSK = true;
-            $('#contribution_skError').addClass('d-none').text('');
+            $('#contribution_skError').text('');
         }
     });
 
@@ -246,7 +246,7 @@ $(function () {
     $('#language_en').on('blur', function () {
         if (category !== 'Literature') {
             $(this).removeClass('impError');
-            $('#language_enError').addClass('d-none').text('');
+            $('#language_enError').text('');
             return;
         }
 
@@ -254,18 +254,18 @@ $(function () {
         if (contributionText === '') {
             $(this).addClass('impError');
             lanEN = false;
-            $('#language_enError').removeClass('d-none').text('Language is required');
+            $('#language_enError').text('Jazyk je povinný');
         } else {
             $(this).removeClass('impError');
             lanEN = true;
-            $('#language_enError').addClass('d-none').text('');
+            $('#language_enError').text('');
         }
     });
 
     $('#language_sk').on('blur', function () {
         if (category !== 'Literature') {
             $(this).removeClass('impError');
-            $('#language_skError').addClass('d-none').text('');
+            $('#language_skError').text('');
             return;
         }
 
@@ -273,18 +273,18 @@ $(function () {
         if (contributionText === '') {
             $(this).addClass('impError');
             lanSK = false;
-            $('#language_skError').removeClass('d-none').text('Language is required');
+            $('#language_skError').text('Jazyk je povinný');
         } else {
             $(this).removeClass('impError');
             lanSK = true;
-            $('#language_skError').addClass('d-none').text('');
+            $('#language_skError').text('');
         }
     });
 
     $('#genre_en').on('blur', function () {
         if (category !== 'Literature') {
             $(this).removeClass('impError');
-            $('#genre_enError').addClass('d-none').text('');
+            $('#genre_enError').text('');
             return;
         }
 
@@ -292,17 +292,17 @@ $(function () {
         if (contributionText === '') {
             $(this).addClass('impError');
             genEN = false;
-            $('#genre_enError').removeClass('d-none').text('Genre is required');
+            $('#genre_enError').text('Žáner je povinný');
         } else {
             $(this).removeClass('impError');
             genEN = true;
-            $('#genre_enError').addClass('d-none').text('');
+            $('#genre_enError').text('');
         }
     });
 
     $('#genre_sk').on('blur', function () {
         if (category !== 'Literature') {
-            $('#genre_skError').addClass('d-none').text('');
+            $('#genre_skError').text('');
             $(this).removeClass('impError');
             return;
         }
@@ -311,11 +311,11 @@ $(function () {
         if (contributionText === '') {
             $(this).addClass('impError');
             genSK = false;
-            $('#genre_skError').removeClass('d-none').text('Genre is required');
+            $('#genre_skError').text('Žáner je povinný');
         } else {
             $(this).removeClass('impError');
             genSK = true;
-            $('#genre_skError').addClass('d-none').text('');
+            $('#genre_skError').text('');
         }
     });
 

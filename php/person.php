@@ -56,9 +56,9 @@
 
     if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
         echo "<form id='sendFormData' action='post'>";
-        echo "<button id='user-delete-person' class='btn btn-danger m-1' data-person-id=" . $personId . ">Delete Person</button>";
+        echo "<button id='user-delete-person' class='btn btn-danger m-1' data-person-id=" . $personId . ">Vymazať Výťaza</button>";
         echo "</form>";
-        echo '<button id="user-edit-person" class="btn btn-primary m-1">Edit Person</button>';
+        echo '<button id="user-edit-person" class="btn btn-primary m-1">Upraviť Informácie</button>';
 
         echo '
                 <div class="container d-none" id="editPersonContainer">
@@ -66,72 +66,72 @@
                 <h3 class="text-center">Edit Nobel Prize Winner</h3>
                 
                 <div id="person-details">
-                    <h4>Person Information</h4>
+                    <h4>Osobné údaje</h4>
                     <div class="row">
                         <div class="col-md-6 form-group">
-                            <label for="name">Name</label>
+                            <label for="name">Meno</label>
                             <input type="text" class="form-control" id="name" name="name">
                             <p id="nameError" class="text-danger"></p>
                             </div>
                             <div class="col-md-6 form-group">
-                                <label for="surname">Surname</label>
+                                <label for="surname">Priezvisko</label>
                                 <input type="text" class="form-control" id="surname" name="surname">
                                 <p id="surnameError" class="text-danger"></p>
                             </div>
                             <div class="col-md-6 form-group">
-                                <label for="sex">Sex</label>
+                                <label for="sex">Pohlavie</label>
                                 <input type="text" class="form-control" id="sex" name="sex">
                                 <p id="sexError" class="text-danger"></p>
                             </div>
                             <div class="col-md-6 form-group">
-                                <label for="organisation">Organisation</label>
+                                <label for="organisation">Organizácia</label>
                                 <input type="text" class="form-control" id="organisation" name="organisation">
                                 <p id="organisationError" class="text-danger"></p>
                             </div>
                             <div class="col-md-6 form-group">
-                                <label for="birth">Birth</label>
+                                <label for="birth">Narodenie</label>
                                 <input type="number" class="form-control" id="birth" name="birth">
                                 <p id="birthError" class="text-danger"></p>
                             </div>
                             <div class="col-md-6 form-group">
-                                <label for="death">Death</label>
+                                <label for="death">Úmrtie</label>
                                 <input type="number" class="form-control" id="death" name="death">
                                 <p id="deathError" class="text-danger"></p>
                             </div>
                             <div class="form-group">
-                                <label for="country">Country</label>
+                                <label for="country">Krajina</label>
                                 <input type="text" class="form-control" id="country" name="country">
                                 <p id="countryError" class="text-danger"></p>
                         </div>
                     </div>
                 </div>
                 <div id="prize-information">
-                    <h4>Prize Information</h4>
+                    <h4>Informácie o cene</h4>
                     <div class="row">
                         <div class="col-md-6 form-group">
-                            <label for="year">Year</label>
+                            <label for="year">Rok</label>
                             <input type="text" class="form-control" id="year" name="year">
                             <p id="yearError" class="text-danger"></p>
 
                         </div>
                         <div class="col-md-6 form-group">
-                            <label for="category">Category</label>
+                            <label for="category">Kategória</label>
                             <select class="form-control" id="category" name="category">
-                                <option value="Physics">Physics</option>
-                                <option value="Chemistry">Chemistry</option>
-                                <option value="Medicine">Medicine</option>
-                                <option value="Literature">Literature</option>
-                                <option value="Peace">Peace</option>
+                                <option value="Physics">Fyzika</option>
+                                <option value="Chemistry">Chémia</option>
+                                <option value="Medicine">Medicína</option>
+                                <option value="Literature">Literatúra</option>
+                                <option value="Peace">Mier</option>
                             </select>
                         </div>
                         <div class="col-md-6 form-group">
-                            <label for="contribution_en">Contribution (EN)</label>
+                            <label for="contribution_en">Príspevok (EN)</label>
                             <textarea class="form-control" id="contribution_en" name="contribution_en" style="resize: none;"></textarea>
                             <p id="contribution_enError" class="text-danger"></p>
 
                         </div>
                         <div class="col-md-6 form-group">
-                            <label for="contribution_sk">Contribution (SK)</label>
+                            <label for="contribution_sk">Príspevok (SK)</label>
                             <textarea class="form-control" id="contribution_sk" name="contribution_sk" style="resize: none;"></textarea>
                             <p id="contribution_skError" class="text-danger"></p>
                         </div>
@@ -139,25 +139,25 @@
                 </div>
                 
                 <div id="prize-details" class="d-none">
-                    <h4>Prize Details</h4>
+                    <h4>Detaily Ceny</h4>
                     <div class="row">
                         <div class="col-md-6 form-group">
-                            <label for="language_en">Language (EN)</label>
+                            <label for="language_en">Jazyk (EN)</label>
                             <input type="text" class="form-control" id="language_en" name="language_en">
                             <p id="language_enError" class="text-danger"></p>
                         </div>
                         <div class="col-md-6 form-group">
-                            <label for="language_sk">Language (SK)</label>
+                            <label for="language_sk">Jazyk (SK)</label>
                             <input type="text" class="form-control" id="language_sk" name="language_sk">
                             <p id="language_skError" class="text-danger"></p>
                         </div>
                         <div class="col-md-6 form-group">
-                            <label for="genre_en">Genre (EN)</label>
+                            <label for="genre_en">Žáner (EN)</label>
                             <input type="text" class="form-control" id="genre_en" name="genre_en">
                             <p id="genre_enError" class="text-danger"></p>
                         </div>
                         <div class="col-md-6 form-group">
-                            <label for="genre_sk">Genre (SK)</label>
+                            <label for="genre_sk">Žáner (SK)</label>
                             <input type="text" class="form-control" id="genre_sk" name="genre_sk">
                             <p id="genre_skError" class="text-danger"></p>
                         </div>

@@ -197,6 +197,12 @@ $(function () {
 
     $('#category').on('change', function () {
         category = $(this).val();
+
+        if ($(this).val() === 'Literature') {
+            $('#prize-details').removeClass('d-none');
+        } else {
+            $('#prize-details').addClass('d-none');
+        }
     });
 
     $('#contribution_en').on('blur', function () {});
