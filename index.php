@@ -17,7 +17,6 @@
     include_once "php/header.php";
     include_once "config.php";
 
-
     /// connect to DB
     $mysqli = fnc\createMySqlConnection($dbconfig);
 

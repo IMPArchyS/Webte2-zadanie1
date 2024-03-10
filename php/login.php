@@ -11,6 +11,28 @@
 <body>
     <?php 
         include_once "regHeader.php";
+        require_once '../vendor/autoload.php';
+        require_once '../config.php';
+        require_once 'functions.php';
+
+        $conn = fnc\createMySqlConnection($dbconfig);
+        // Inicializacia Google API klienta
+        $client = new Google\Client();
+
+        // Definica konfiguracneho JSON suboru pre autentifikaciu klienta.
+        // Subor sa stiahne z Google Cloud Console v zalozke Credentials.
+        $client->setAuthConfig("../client_secret.json");
+
+        // Nastavenie URI, na ktoru Google server presmeruje poziadavku po uspesnej autentifikacii.
+        $redirect_uri = "https://node51.webte.fei.stuba.sk/zad1/php/redirect.php";
+        $client->setRedirectUri($redirect_uri);
+
+        // Definovanie Scopes - rozsah dat, ktore pozadujeme od pouzivatela z jeho Google uctu.
+        $client->addScope("email");
+        $client->addScope("profile");
+
+        // Vytvorenie URL pre autentifikaciu na Google server - odkaz na Google prihlasenie.
+        $auth_url = $client->createAuthUrl();
     ?>
 
     <div class="container">
@@ -34,7 +56,13 @@
             </div>
             <button id="submitLoginButton" type="submit" class="btn btn-primary">Prihlásiť sa</button>
         </form>
-        <p id="wrongCredentials" class="text-danger d-none">Zlé údaje</p>
+    <p id="wrongCreds" class="text-danger d-none">Zlé údaje</p>
+        <div class ="googleSign">
+        <?php
+        $authUrl = $client->createAuthUrl();
+        echo '<a href="'.filter_var($authUrl, FILTER_SANITIZE_URL).'"><img src="../images/googleSign.png" alt="fajny google login"></a>';
+        ?>
+    </div>
         <p>Nový člen? <a href="register.php">Registrovať tu</a></p>
         
     </div>

@@ -71,14 +71,13 @@ namespace fnc;
 
     function createPagination($page, $totalPages, $itemsPerPage, $sort, $order, $year, $category): void {
         echo '<div class="pagination">';
-                
-        if ($page > 1) {
-            echo '<a class="btn btn-primary" href="?page=1&itemsPerPage=' . $itemsPerPage . '&sort=' . $sort . '&order=' . $order . '&year=' . $year . '&category=' . $category . '">Prvé</a>';
-            echo '<a class="btn btn-primary" href="?page=' . ($page - 1) . '&itemsPerPage=' . $itemsPerPage . '&sort=' . $sort . '&order=' . $order . '&year=' . $year . '&category=' . $category . '">Predošlé</a>';
-        }
 
         $startPage = max(1, $page - 2);
         $endPage = min($startPage + 4, $totalPages);
+
+        if ($startPage > 1) {
+            echo '<a class="btn btn-primary" href="?page=1&itemsPerPage=' . $itemsPerPage . '&sort=' . $sort . '&order=' . $order . '&year=' . $year . '&category=' . $category . '">1</a>';
+        }
 
         for ($i = $startPage; $i <= $endPage; $i++) {
             if ($i == $page) {
@@ -88,10 +87,10 @@ namespace fnc;
             }
         }
 
-        if ($page < $totalPages) {
-            echo '<a class="btn btn-primary" href="?page=' . ($page + 1) . '&itemsPerPage=' . $itemsPerPage . '&sort=' . $sort . '&order=' . $order . '&year=' . $year . '&category=' . $category . '">Dalšie</a>';
-            echo '<a class="btn btn-primary" href="?page=' . $totalPages . '&itemsPerPage=' . $itemsPerPage . '&sort=' . $sort . '&order=' . $order . '&year=' . $year . '&category=' . $category . '">Posledné</a>';
+        if ($endPage < $totalPages) {
+            echo '<a class="btn btn-primary" href="?page=' . $totalPages . '&itemsPerPage=' . $itemsPerPage . '&sort=' . $sort . '&order=' . $order . '&year=' . $year . '&category=' . $category . '">' . $totalPages . '</a>';
         }
+
 
         echo '</div>';
     }
