@@ -19,16 +19,14 @@
 
 
     /// connect to DB
-    //$mysqli = new mysqli($dbconfig['hostname'], $dbconfig['username'], $dbconfig['password'], $dbconfig['dbname']);
     $mysqli = fnc\createMySqlConnection($dbconfig);
 
     echo "<main class='container'>";
     if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         echo '<p>Nie ste prihlaseny</p>';
     } else {
-        echo '<a class="btn btn-primary mx-0" href="php/restricted.php">Add Nobel Prize Winner</a>';
+        echo '<a class="btn btn-primary mx-0" href="php/restricted.php">Pridať Výťaza</a>';
     }
-    //createPersonButtons();
     /// filters
     $page = isset($_GET['page']) ? $_GET['page'] : 1;
     $itemsPerPage = isset($_GET['itemsPerPage']) ? $_GET['itemsPerPage'] : 10;

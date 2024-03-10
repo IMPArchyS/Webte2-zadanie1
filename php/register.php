@@ -7,39 +7,39 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-    <title>Register</title>
+    <title>Registrácia</title>
 </head>
 <body>
     <?php 
         include_once "regHeader.php";
     ?>
     <div class="container">
-        <h1>Register</h1>
+        <h1>Registrácia</h1>
         <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" id="loginForm">
             <div class="form-group">
-                <label for="firstname">*First Name</label>
+                <label for="firstname">*Meno</label>
                 <input type="text" class="form-control" id="firstname" name="firstname" value="<?php echo isset($_POST['firstname']) ? htmlspecialchars($_POST['firstname']) : ''; ?>">
-                <p id="firstnameError" class="text-danger d-none">This field is required</p>
+                <p id="firstnameError" class="text-danger d-none">Povinné pole</p>
             </div>
             <div class="form-group">
-                <label for="lastname">*Last Name</label>
+                <label for="lastname">*Priezvisko</label>
                 <input type="text" class="form-control" id="lastname" name="lastname" value="<?php echo isset($_POST['lastname']) ? htmlspecialchars($_POST['lastname']) : ''; ?>">
-                <p id="lastnameError" class="text-danger d-none">This field is required</p>
+                <p id="lastnameError" class="text-danger d-none">Povinné pole</p>
             </div>
             <div class="form-group">
                 <label for="email">*Email</label>
                 <input type="email" class="form-control" id="email" name="email" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>">
-                <p id="emailError" class="text-danger d-none">Invalid email</p>
+                <p id="emailError" class="text-danger d-none">Neplatný email</p>
             </div>
             <div class="form-group">
-                <label for="password">*Password</label>
+                <label for="password">*Heslo</label>
                 <input type="password" class="form-control" id="password" name="password">
-                <p id="passwordError" class="text-danger d-none">This field is required</p>
+                <p id="passwordError" class="text-danger d-none">Povinné pole</p>
             </div>
-            <button type="submit" class="btn btn-primary">Register</button>
+            <button type="submit" class="btn btn-primary">Registrovať</button>
         </form>
-        <p id="userOccupied" class="text-danger d-none">Email is already in use</p>
-        <p>Already registered? <a href="login.php">Login here</a></p>
+        <p id="userOccupied" class="text-danger d-none">Email sa používa</p>
+        <p>Už zaregistrovaný? <a href="login.php">Prihlásiť sa</a></p>
     <script src="../js/registerLogic.js"></script>
     <?php 
     error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);

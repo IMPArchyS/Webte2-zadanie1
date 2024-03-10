@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-    <title>Authentification</title>
+    <title>Autentifikácia</title>
 </head>
 <body>
 <?php 

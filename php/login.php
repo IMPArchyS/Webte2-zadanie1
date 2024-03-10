@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-    <title>Login</title>
+    <title>Prihlásenie</title>
 </head>
 <body>
     <?php 
@@ -14,28 +14,28 @@
     ?>
 
     <div class="container">
-        <h1>Login</h1>
+        <h1>Prihlásenie</h1>
         <form method="POST" action="login.php" id="loginForm">
             
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" class="form-control" id="email" name="email" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>">
-                <p id="emailError" class="text-danger d-none">Invalid email</p>
+                <p id="emailError" class="text-danger d-none">Neplatný email</p>
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
+                <label for="password">Heslo</label>
                 <input type="password" class="form-control" id="password" name="password">
-                <p id="passwordError" class="text-danger d-none">This field is required</p>
+                <p id="passwordError" class="text-danger d-none">Povinné pole</p>
             </div>
             <div class="form-group">
-                <label for="2fa">2FA Code</label>
+                <label for="2fa">2FA kód</label>
                 <input type="number" class="form-control" id="2fa" name="2fa">
-                <p id="2faError" class="text-danger d-none">This field is required</p>
+                <p id="2faError" class="text-danger d-none">Povinné pole</p>
             </div>
-            <button id="submitLoginButton" type="submit" class="btn btn-primary">Login</button>
+            <button id="submitLoginButton" type="submit" class="btn btn-primary">Prihlásiť sa</button>
         </form>
-        <p id="wrongCredentials" class="text-danger d-none">Wrong credentials</p>
-        <p>Not registered? <a href="register.php">Register here</a></p>
+        <p id="wrongCredentials" class="text-danger d-none">Zlé údaje</p>
+        <p>Nový člen? <a href="register.php">Registrovať tu</a></p>
         
     </div>
     <?php 

@@ -6,7 +6,9 @@ $(function () {
 
     editButton.on('click', function () {
         $('#editPersonModalLabel').text('Edit person');
+        $('#editPersonContainer').removeClass('d-none');
         $('#editPersonModal').modal('show');
+        $(this).hide();
         method = 'PATCH';
     });
 
@@ -22,11 +24,20 @@ $(function () {
         $('#editPersonModal').modal('hide');
     });
 
+    /// backend stuff
+    setInterval(function () {
+        $.get('checkLogin.php', function (data) {
+            if (data == 'not_logged_in' && $('#editPersonContainer').length) {
+                location.reload();
+            }
+        });
+    }, 1000);
+
     $('#sendFormData').on('submit', function (event) {
         event.preventDefault();
         $.ajax({
             type: 'POST',
-            url: 'editPerson.php',
+            url: 'removePerson.php',
             data: {
                 _method: method,
                 _personId: personId,
@@ -39,6 +50,7 @@ $(function () {
                 if (response === 'success') {
                     $('#editPersonModal').modal('hide');
                     $('#feedbackToast').addClass('impToastGood');
+                    $('#feedbackToast').removeClass('impToastBad');
                     $('#toastInfo').text('SUCCESS');
                     $('#feedbackToast').toast('show');
                     setTimeout(function () {
@@ -59,6 +71,7 @@ $(function () {
             error: function () {
                 console.log('FFF');
                 $('#toastInfo').text('FAILURE');
+                $('#feedbackToast').removeClass('impToastGood');
                 $('#feedbackToast').addClass('impToastBad');
             },
         });

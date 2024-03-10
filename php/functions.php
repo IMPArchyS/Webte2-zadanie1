@@ -73,8 +73,8 @@ namespace fnc;
         echo '<div class="pagination">';
                 
         if ($page > 1) {
-            echo '<a class="btn btn-primary" href="?page=1&itemsPerPage=' . $itemsPerPage . '&sort=' . $sort . '&order=' . $order . '&year=' . $year . '&category=' . $category . '">First</a>';
-            echo '<a class="btn btn-primary" href="?page=' . ($page - 1) . '&itemsPerPage=' . $itemsPerPage . '&sort=' . $sort . '&order=' . $order . '&year=' . $year . '&category=' . $category . '">Previous</a>';
+            echo '<a class="btn btn-primary" href="?page=1&itemsPerPage=' . $itemsPerPage . '&sort=' . $sort . '&order=' . $order . '&year=' . $year . '&category=' . $category . '">Prvé</a>';
+            echo '<a class="btn btn-primary" href="?page=' . ($page - 1) . '&itemsPerPage=' . $itemsPerPage . '&sort=' . $sort . '&order=' . $order . '&year=' . $year . '&category=' . $category . '">Predošlé</a>';
         }
 
         $startPage = max(1, $page - 2);
@@ -89,8 +89,8 @@ namespace fnc;
         }
 
         if ($page < $totalPages) {
-            echo '<a class="btn btn-primary" href="?page=' . ($page + 1) . '&itemsPerPage=' . $itemsPerPage . '&sort=' . $sort . '&order=' . $order . '&year=' . $year . '&category=' . $category . '">Next</a>';
-            echo '<a class="btn btn-primary" href="?page=' . $totalPages . '&itemsPerPage=' . $itemsPerPage . '&sort=' . $sort . '&order=' . $order . '&year=' . $year . '&category=' . $category . '">Last</a>';
+            echo '<a class="btn btn-primary" href="?page=' . ($page + 1) . '&itemsPerPage=' . $itemsPerPage . '&sort=' . $sort . '&order=' . $order . '&year=' . $year . '&category=' . $category . '">Dalšie</a>';
+            echo '<a class="btn btn-primary" href="?page=' . $totalPages . '&itemsPerPage=' . $itemsPerPage . '&sort=' . $sort . '&order=' . $order . '&year=' . $year . '&category=' . $category . '">Posledné</a>';
         }
 
         echo '</div>';
