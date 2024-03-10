@@ -1,6 +1,6 @@
 <header>
     <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand ml-auto" href="/">Nobelove Ceny</a>
+        <a id="mainPageButton" class="navbar-brand ml-auto" href="../index.php">Nobelove Ceny</a>
         <div class="mx-4" id="navbarNav">
             <ul class="navbar-nav ml-auto d-flex flex-row justify-content-center align-items-center ">
                     <?php 
