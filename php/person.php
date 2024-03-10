@@ -49,17 +49,34 @@
 
     if ($row) {
         // Display the fetched data
-        echo "<pre>";
-        print_r($row);
-        echo "</pre>";
+        echo '<div class="container">';
+        echo '<h4>Person Details</h4>';
+        echo '<div class="row">';
+        echo '<div class="col-md-6">';
+        echo '<p><strong>Name:</strong> ' . $row['name'] . '</p>';
+        echo '<p><strong>Surname:</strong> ' . $row['surname'] . '</p>';
+        echo '<p><strong>Sex:</strong> ' . $row['sex'] . '</p>';
+        echo '<p><strong>Organisation:</strong> ' . $row['organisation'] . '</p>';
+        echo '<p><strong>Contribution (English):</strong> ' . $row['contribution_en'] . '</p>';
+        echo '<p><strong>Contribution (Slovak):</strong> ' . $row['contribution_sk'] . '</p>';
+        echo '</div>';
+        echo '<div class="col-md-6">';
+        echo '<p><strong>Birth:</strong> ' . $row['birth'] . '</p>';
+        echo '<p><strong>Death:</strong> ' . $row['death'] . '</p>';
+        echo '<p><strong>Country:</strong> ' . $row['countryName'] . '</p>';
+        echo '<p><strong>Year:</strong> ' . $row['year'] . '</p>';
+        echo '<p><strong>Category:</strong> ' . $row['category'] . '</p>';
+        echo '</div>';
+        echo '</div>';
     }
 
     if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-        echo "<form id='sendFormData' action='post'>";
-        echo "<button id='user-delete-person' class='btn btn-danger m-1' data-person-id=" . $personId . ">Vymazať Výťaza</button>";
+        echo "<form id='sendFormData' action='post' class=''>";
+        echo "<button id='user-delete-person' class='btn btn-danger mb-3' data-person-id=" . $personId . ">Vymazať Výťaza</button>";
         echo "</form>";
-        echo '<button id="user-edit-person" class="btn btn-primary m-1">Upraviť Informácie</button>';
+        echo '<button id="user-edit-person" class="btn btn-primary mb-3">Upraviť Informácie</button>';
 
+    
         echo '
                 <div class="container d-none" id="editPersonContainer">
             <form method="post" id="editFormData">
