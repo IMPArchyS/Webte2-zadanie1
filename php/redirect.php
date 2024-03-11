@@ -46,6 +46,22 @@ if (isset($_GET['code'])) {
     // Na tomto mieste je vhodne vytvorit poziadavku na vlastnu DB, ktora urobi:
     // 1. Ak existuje prihlasenie Google uctom -> ziskaj mi minule prihlasenia tohoto pouzivatela.
     // 2. Ak neexistuje prihlasenie pod tymto Google uctom -> vytvor novy zaznam v tabulke prihlaseni.
+    $conn = fnc\createMySqlConnection($dbconfig);
+    if (!$conn) echo "error";
+    else {
+        $stmt = $conn->prepare("SELECT email, googleID FROM users WHERE email = ? AND googleID = ?"); 
+        $stmt->bind_param("ss", $g_email, $g_id); 
+        $stmt->execute(); 
+        $result = $stmt->get_result(); // Fetch the result once
+        if ($result->num_rows == 0) {
+            $stmt->close(); // Close the previous statement before reusing it
+            $stmt = $conn->prepare("INSERT INTO users (first_name, last_name, email, googleID) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("ssss", $g_name, $g_surname, $g_email, $g_id);   
+            $stmt->execute();
+            $stmt->close();
+            $conn->close();
+        }
+    }
     
 
     $_SESSION['user_id'] = $g_name;
