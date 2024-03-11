@@ -296,10 +296,10 @@ $(function () {
                 console.log('PATCH');
                 console.log(response);
                 if (response === 'success') {
-                    $('#feedbackToastText').text('SUCCESSFULY INSERTED');
+                    $('#feedbackToastText').text('Úspešne modifikovaný');
                     $('#feedbackToast').addClass('impToastGood');
                     $('#feedbackToast').removeClass('impToastBad');
-                    $('#toastInfo').text('SUCCESS');
+                    $('#toastInfo').text('Úspech');
                     $('#editPersonModal').modal('hide');
                     $('#feedbackToast').toast('show');
                     setTimeout(function () {
@@ -307,13 +307,13 @@ $(function () {
                         window.location.href = window.location.href.split('?')[0] + '?surname=' + surname;
                     }, 2000);
                 } else if (response === 'fail') {
-                    $('#toastInfo').text('FAILURE');
-                    $('#feedbackToastText').text('INVALID PERSON INFORMATION');
+                    $('#toastInfo').text('Neúspech');
+                    $('#feedbackToastText').text('Nevhodné informácie');
                     $('#feedbackToast').removeClass('impToastGood');
                     $('#feedbackToast').addClass('impToastBad');
                 } else {
-                    $('#toastInfo').text('FAILURE');
-                    $('#feedbackToastText').text('COULDNT INSERT');
+                    $('#toastInfo').text('Neúspech');
+                    $('#feedbackToastText').text('Nedalo sa pridať');
                     $('#feedbackToast').removeClass('impToastGood');
                     $('#feedbackToast').addClass('impToastBad');
                 }
@@ -326,8 +326,8 @@ $(function () {
             },
             error: function () {
                 console.log('FFF');
-                $('#toastInfo').text('FATAL FAILURE');
-                $('#feedbackToastText').text('INTERNAL DB ERROR');
+                $('#toastInfo').text('Fatálna chyba');
+                $('#feedbackToastText').text('Databázová chyba');
                 $('#feedbackToast').removeClass('impToastGood');
                 $('#feedbackToast').addClass('impToastBad');
                 $('#feedbackToast').toast('show');

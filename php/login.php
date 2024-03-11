@@ -54,13 +54,13 @@
                 <input type="number" class="form-control" id="2fa" name="2fa">
                 <p id="2faError" class="text-danger d-none">Povinné pole</p>
             </div>
-            <button id="submitLoginButton" type="submit" class="btn btn-primary">Prihlásiť sa</button>
+            <button id="submitLoginButton" type="submit" class="my-3 btn btn-primary">Prihlásiť sa</button>
         </form>
     <p id="wrongCreds" class="text-danger d-none">Zlé údaje</p>
         <div class ="googleSign">
         <?php
         $authUrl = $client->createAuthUrl();
-        echo '<a href="'.filter_var($authUrl, FILTER_SANITIZE_URL).'"><img src="../images/googleSign.png" alt="fajny google login"></a>';
+        echo '<a class="m-0" href="'.filter_var($authUrl, FILTER_SANITIZE_URL).'"><img src="../images/googleSign.png" class="my-3" style="width: 250px; height: 50px;"alt="fajny google login"></a>';
         ?>
     </div>
         <p>Nový člen? <a href="register.php">Registrovať tu</a></p>

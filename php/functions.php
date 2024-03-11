@@ -70,7 +70,7 @@ namespace fnc;
     }
 
     function createPagination($page, $totalPages, $itemsPerPage, $sort, $order, $year, $category): void {
-        echo '<div class="pagination">';
+        echo '<div class="pagination d-flex justify-content-center align-items-center">';
 
         $startPage = max(1, $page - 2);
         $endPage = min($startPage + 4, $totalPages);

@@ -137,7 +137,7 @@
         </div>
         <div class="row">
                 <div class="col-12 text-center mb-4">
-                    <button name="submit" id="pushChanges" type="submit" class="btn btn-primary btn-lg mt-3">Save changes</button>
+                    <button name="submit" id="pushChanges" type="submit" class="btn btn-primary btn-lg mt-3">Pridať</button>
                 </div>
         </div>
 </form>

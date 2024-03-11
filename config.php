@@ -1,18 +1,18 @@
 <?php
 
 $hostname = "localhost";
-$username = "imp";
-$password = "vmko";
+$username = "xjanikd";
+$password = "imP.weB2";
 $dbname = "nobel_prizes";
 
 define("HOSTNAME", "localhost");
-define("USERNAME", "imp");
-define("PASSWORD", "vmko");
+define("USERNAME", "xjanikd");
+define("PASSWORD", "imP.weB2");
 define("DBNAME", "nobel_prizes");
 
 $dbconfig = array(
-    'hostname' => '127.0.0.1',
-    'username' => 'imp',
-    'password' => 'vmko',
+    'hostname' => 'localhost',
+    'username' => 'xjanikd',
+    'password' => 'imP.weB2',
     'dbname' => 'nobel_prizes',
 );

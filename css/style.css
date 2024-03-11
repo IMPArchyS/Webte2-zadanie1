@@ -5,6 +5,10 @@ a {
 .impError {
     border: 2px solid red !important;
 }
+.fit-picture {
+    max-width: 400px;
+    max-height: 200px;
+}
 
 #feedbackToast {
     position: fixed;
@@ -14,12 +18,14 @@ a {
     background-color: rgba(255, 255, 255, 1); /* white background */
 }
 
-#cookieToast {
+.cookie-popup {
     position: fixed;
-    left: 50%;
-    top: 5%;
-    transform: translateX(-50%);
-    background-color: rgba(255, 255, 255, 1); /* white background */
+    bottom: 20px;
+    right: 20px;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .impToastGood {

@@ -9,8 +9,17 @@ $(function () {
         window.location.href = 'php/logout.php';
     });
 
-    $('#acceptCookies').on('click', function () {
-        $('#cookieToast').addClass('d-none');
-        document.cookie = 'cookiePopupShown=true; expires=' + new Date(new Date().getTime() + 86400 * 30).toUTCString() + '; path=/';
+    $('#cookieButton').on('click', function () {
+        $.ajax({
+            url: 'php/acceptCookie.php',
+            method: 'POST',
+            success: function (response) {
+                $('#cookieModal').addClass('d-none');
+                console.log('uspech');
+            },
+            error: function (xhr, status, error) {
+                console.log('error');
+            },
+        });
     });
 });

@@ -7,6 +7,7 @@
                         if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                             // Neprihlaseny pouzivatel, zobraz odkaz na Login alebo Register stranku.
                             $current_page = basename($_SERVER['PHP_SELF']);
+                            echo '<li class="nav-item"> <h5 class="text-center mb-0 mx-4">Hosť</h5> </li>';
                             if ($current_page == 'person.php') {
                             echo '<li class="nav-item">
                                     <a class="btn btn-primary" href="login.php" id="login">Prihlásiť sa</a>

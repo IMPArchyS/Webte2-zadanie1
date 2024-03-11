@@ -417,18 +417,18 @@ $(function () {
                     console.log(method);
                     console.log(response);
                     if (response === 'success') {
-                        $('#feedbackToastText').text('SUCCESSFULY INSERTED');
+                        $('#feedbackToastText').text('Úspešne pridané');
                         $('#feedbackToast').addClass('impToastGood');
                         $('#feedbackToast').removeClass('impToastBad');
-                        $('#toastInfo').text('SUCCESS');
+                        $('#toastInfo').text('Úspech');
                     } else if (response === 'fail') {
-                        $('#toastInfo').text('FAILURE');
-                        $('#feedbackToastText').text('INVALID PERSON INFORMATION');
+                        $('#toastInfo').text('Neúspech');
+                        $('#feedbackToastText').text('Nesprávne informácie');
                         $('#feedbackToast').removeClass('impToastGood');
                         $('#feedbackToast').addClass('impToastBad');
                     } else {
-                        $('#toastInfo').text('FAILURE');
-                        $('#feedbackToastText').text('COULDNT INSERT');
+                        $('#toastInfo').text('Neúspech');
+                        $('#feedbackToastText').text('Nedalo sa pridať');
                         $('#feedbackToast').removeClass('impToastGood');
                         $('#feedbackToast').addClass('impToastBad');
                     }
@@ -441,8 +441,8 @@ $(function () {
                 },
                 error: function () {
                     console.log('FFF');
-                    $('#toastInfo').text('FATAL FAILURE');
-                    $('#feedbackToastText').text('INTERNAL DB ERROR');
+                    $('#toastInfo').text('Fatálna chyba');
+                    $('#feedbackToastText').text('Databázová chyba');
                     $('#feedbackToast').removeClass('impToastGood');
                     $('#feedbackToast').addClass('impToastBad');
                     $('#feedbackToast').toast('show');

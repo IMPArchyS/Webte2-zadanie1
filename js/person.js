@@ -51,7 +51,7 @@ $(function () {
                     $('#editPersonModal').modal('hide');
                     $('#feedbackToast').addClass('impToastGood');
                     $('#feedbackToast').removeClass('impToastBad');
-                    $('#toastInfo').text('SUCCESS');
+                    $('#toastInfo').text('Úspech');
                     $('#feedbackToast').toast('show');
                     setTimeout(function () {
                         $('#feedbackToast').toast('hide');
@@ -60,7 +60,7 @@ $(function () {
                 } else {
                     $('#editPersonModal').modal('hide');
                     $('#feedbackToast').removeClass('impToastGood');
-                    $('#toastInfo').text('FAILURE');
+                    $('#toastInfo').text('Neúspech');
                     $('#feedbackToast').toast('show');
                     $('#feedbackToast').addClass('impToastBad');
                     setTimeout(function () {
@@ -70,7 +70,7 @@ $(function () {
             },
             error: function () {
                 console.log('FFF');
-                $('#toastInfo').text('FAILURE');
+                $('#toastInfo').text('Neúspech');
                 $('#feedbackToast').removeClass('impToastGood');
                 $('#feedbackToast').addClass('impToastBad');
             },
