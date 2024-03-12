@@ -54,11 +54,21 @@
     function createTableHeader($sort, $order, $page, $itemsPerPage, $selectedYear, $selectedCategory) : void {
         echo "<thead class=''><tr id='tableHead'>";
 
-        echo '<th><a href="?page=' . $page . '&sort=surname&order=' . ($sort == 'surname' && $order == 'asc' ? 'desc' : 'asc') . '&itemsPerPage=' . $itemsPerPage . '">Priezvisko</a></th>';
-        if ($selectedYear == "")
+        if ($selectedYear == "" && $selectedCategory == "") {
+            echo '<th><a href="?page=' . $page . '&sort=surname&order=' . ($sort == 'surname' && $order == 'asc' ? 'desc' : 'asc') . '&itemsPerPage=' . $itemsPerPage . '">Priezvisko</a></th>';
             echo '<th><a href="?page=' . $page . '&sort=year&order=' . ($sort == 'year' && $order == 'asc' ? 'desc' : 'asc') . '&itemsPerPage=' . $itemsPerPage . '">Rok</a></th>';
-        if ($selectedCategory == "")
             echo '<th><a href="?page=' . $page . '&sort=category&order=' . ($sort == 'category' && $order == 'asc' ? 'desc' : 'asc') . '&itemsPerPage=' . $itemsPerPage . '">Kategória</a></th>';    
+        } elseif ($selectedYear == "") {
+            echo '<th><a href="?page=' . $page . '&sort=surname&order=' . ($sort == 'surname' && $order == 'asc' ? 'desc' : 'asc') . '&itemsPerPage=' . $itemsPerPage . '&category=' . $selectedCategory . '">Priezvisko</a></th>';
+            echo '<th><a href="?page=' . $page . '&sort=year&order=' . ($sort == 'year' && $order == 'asc' ? 'desc' : 'asc') . '&itemsPerPage=' . $itemsPerPage . '&category=' . $selectedCategory . '">Rok</a></th>';
+        }
+        elseif ($selectedCategory == "") {
+            echo '<th><a href="?page=' . $page . '&sort=surname&order=' . ($sort == 'surname' && $order == 'asc' ? 'desc' : 'asc') . '&itemsPerPage=' . $itemsPerPage . '&year=' . $selectedYear . '">Priezvisko</a></th>';
+            echo '<th><a href="?page=' . $page . '&sort=category&order=' . ($sort == 'category' && $order == 'asc' ? 'desc' : 'asc') . '&itemsPerPage=' . $itemsPerPage . '&year=' . $selectedYear . '">Kategória</a></th>';    
+        }
+        else 
+        echo '<th><a href="?page=' . $page . '&sort=surname&order=' . ($sort == 'surname' && $order == 'asc' ? 'desc' : 'asc') . '&itemsPerPage=' . $itemsPerPage . '&year=' . $selectedYear . '&category=' . $selectedCategory . '">Priezvisko</a></th>';
+
 
         echo '<th>Organizácia</th>';
         echo '<th>Krajina</th>';
