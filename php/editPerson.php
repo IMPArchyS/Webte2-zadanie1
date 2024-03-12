@@ -23,6 +23,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         'genre_en' => $_POST['genre_en'],
         'genre_sk' => $_POST['genre_sk']
     ];
+    if (!dbs\checkByRegexForEditing($result)) {
+        echo "fail";
+        exit();
+    }
 
     if (!dbs\checkInfo($result)) {
         echo "fail";
@@ -92,7 +96,7 @@ function editPerson($id, $info, $config) {
     }   
 
     if (!empty($info["sex"])) {
-        $sex = substr($info["sex"], 0, 1);
+        $sex = mb_substr($info["sex"], 0, 1, 'UTF-8');
         $stmt = $conn->prepare("UPDATE persons SET sex = ? WHERE id = ?");
         $stmt->bind_param("si", $sex, $id);
         if (!$stmt->execute()) {

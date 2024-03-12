@@ -14,7 +14,7 @@
         include_once "regHeader.php";
     ?>
     <div class="container impContainer">
-        <h1 class="impFontW">Registrácia</h1>
+        <h1 class="impFontH text-center">Registrácia</h1>
         <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" id="loginForm">
             <div class="form-group my-2">
                 <label class="font-weight-bold impFontW fs-5"  for="firstname">*Meno</label>
@@ -46,6 +46,7 @@
             
             require_once "functions.php";
             require_once "../config.php";
+            require_once "../dbsFunctions.php";
             require_once '../vendor/phpgangsta/googleauthenticator/PHPGangsta/GoogleAuthenticator.php';
             
             session_start();
@@ -63,8 +64,19 @@
             
                 // Fetch the user from the database
                 $user = fnc\getUserByEmail($email, $dbconfig);
-            
-                if ($user) {
+                $emailValid = dbs\checkRegisterByRegex($email);
+                if (!$emailValid) {
+                    echo "
+                    <script>
+                    $(function () {
+                        $('#email').addClass('impError');
+                        $('#userOccupied').removeClass('d-none');
+                    });
+                    </script>
+                    ";
+                    $error = "invalid email";
+                }
+                elseif ($user) {
                     // The user exists, show an error message
                     echo "
                     <script>

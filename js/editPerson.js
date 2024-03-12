@@ -52,7 +52,7 @@ $(function () {
         if (!nameRegex.test(name)) {
             $(this).addClass('impError');
             nameValid = false;
-            $('#nameError').text('Invalid name');
+            $('#nameError').text('neplatné meno');
         } else {
             $(this).removeClass('impError');
             nameValid = true;
@@ -71,7 +71,7 @@ $(function () {
         if (!nameRegex.test(surname)) {
             $(this).addClass('impError');
             surValid = false;
-            $('#surnameError').text('Invalid surname');
+            $('#surnameError').text('neplatné priezvisko');
         } else {
             $(this).removeClass('impError');
             surValid = true;
@@ -91,7 +91,7 @@ $(function () {
         if (!nameRegex.test(sex)) {
             $(this).addClass('impError');
             sexValid = false;
-            $('#sexError').text('Invalid sex');
+            $('#sexError').text('neplatné pohlavie');
         } else {
             $(this).removeClass('impError');
             sexValid = true;
@@ -118,7 +118,7 @@ $(function () {
         if (!numberRegex.test(birth)) {
             $(this).addClass('impError');
             bdayValid = false;
-            $('#birthError').text('Invalid date');
+            $('#birthError').text('neplatný rok');
         } else {
             $(this).removeClass('impError');
             bdayValid = true;
@@ -127,7 +127,7 @@ $(function () {
         if (nobelYear != 0 && bday > nobelYear) {
             $('#year').addClass('impError');
             yearValid = false;
-            $('#yearError').text('Invalid date');
+            $('#yearError').text('neplatný rok');
         }
         $('#year').trigger('blur');
     });
@@ -142,11 +142,11 @@ $(function () {
         if (!numberRegex.test(death)) {
             $(this).addClass('impError');
             deathValid = false;
-            $('#deathError').text('Invalid date');
+            $('#deathError').text('neplatný rok');
         } else if (bday > death) {
             $(this).addClass('impError');
             deathValid = false;
-            $('#deathError').text('Invalid date');
+            $('#deathError').text('neplatný rok');
         } else {
             $(this).removeClass('impError');
             deathValid = true;
@@ -166,7 +166,7 @@ $(function () {
         if (!nameRegex.test(country)) {
             $(this).addClass('impError');
             countryValid = false;
-            $('#countryError').text('Invalid country');
+            $('#countryError').text('neplatná krajina');
         } else {
             $(this).removeClass('impError');
             countryValid = true;
@@ -187,7 +187,7 @@ $(function () {
         if (!numberRegex.test(year) || year < bday) {
             $(this).addClass('impError');
             yearValid = false;
-            $('#yearError').text('Invalid date');
+            $('#yearError').text('neplatný rok');
         } else {
             $(this).removeClass('impError');
             yearValid = true;
@@ -253,6 +253,9 @@ $(function () {
         let genre_en = $('#genre_en').val();
         let genre_sk = $('#genre_sk').val();
 
+        let urlParams = new URLSearchParams(window.location.search);
+        let oldSurname = urlParams.get('surname');
+
         console.log('name:', name);
         console.log('surname:', surname);
         console.log('sex:', sex);
@@ -304,7 +307,8 @@ $(function () {
                     $('#feedbackToast').toast('show');
                     setTimeout(function () {
                         $('#feedbackToast').toast('hide');
-                        window.location.href = window.location.href.split('?')[0] + '?surname=' + surname;
+                        if (surname == '') window.location.href = window.location.href.split('?')[0] + '?surname=' + oldSurname;
+                        else window.location.href = window.location.href.split('?')[0] + '?surname=' + surname;
                     }, 2000);
                 } else if (response === 'fail') {
                     $('#toastInfo').text('Neúspech');

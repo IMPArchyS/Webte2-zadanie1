@@ -50,7 +50,7 @@
     if ($row) {
         // Display the fetched data
         echo '<div class="container impContainer">';
-        echo '<h4 class="my-2 impFontW">Person Details</h4>';
+        echo '<h4 class="my-2 impFontH font-weight-bold">Informácie o Osobe</h4>';
         echo '<div class="row">';
         echo '<div class="col-md-6">';
         echo '<h5 class="my-1 impFontW font-weight-bold">Meno:</h5>';
@@ -91,10 +91,10 @@
         echo '
                 <div class="container d-none" id="editPersonContainer">
             <form method="post" id="editFormData">
-                <h3 class="text-center impFontW">Edit Nobel Prize Winner</h3>
+                <h3 class="text-center impFontH">Modifikovať Osobu</h3>
                 
                 <div id="person-details">
-                    <h4 class="impFontW">Osobné údaje</h4>
+                    <h4 class="impFontH">Osobné údaje</h4>
                     <div class="row">
                         <div class="col-md-6 form-group">
                             <label class="my-1 impFontW font-weight-bold fs-5" for="name">Meno</label>
@@ -134,7 +134,7 @@
                     </div>
                 </div>
                 <div id="prize-information">
-                    <h4 class="impFontW">Informácie o cene</h4>
+                    <h4 class="impFontH">Informácie o cene</h4>
                     <div class="row">
                         <div class="col-md-6 form-group">
                             <label class="my-1 impFontW font-weight-bold fs-5" for="year">Rok</label>
@@ -167,7 +167,7 @@
                 </div>
                 
                 <div id="prize-details" class="d-none">
-                    <h4 class="impFontW">Detaily Ceny</h4>
+                    <h4 class="impFontH">Detaily Ceny</h4>
                     <div class="row">
                         <div class="col-md-6 form-group">
                             <label class="my-1 impFontW font-weight-bold fs-5" for="language_en">Jazyk (EN)</label>

@@ -24,8 +24,14 @@ tbody a {
     color: rgb(217, 141, 255);
 }
 
+.impFontH {
+    color: rgb(241, 95, 229) !important;
+    font-weight: bold;
+}
+
 .impFontW {
     color: rgb(255, 209, 251) !important;
+    font-weight: bolder;
 }
 
 .fit-picture {

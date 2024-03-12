@@ -214,6 +214,8 @@ function checkInfo($info) {
     if (strlen($info["name"]) > 254) return false;
     if (strlen($info["surname"]) > 254) return false;
     if (strlen($info["org"]) > 254) return false;
+    if (strlen($info["country"]) > 254) return false;
+
     if ((int)($info["birth"]) < 0 || (int)($info["birth"]) > 9999) return false;
     if ((int)($info["death"]) < 0 || (int)($info["death"]) > 9999) return false;
 
@@ -225,5 +227,47 @@ function checkInfo($info) {
     if (strlen($info["genre_en"]) > 254) return false;
     if (strlen($info["genre_sk"]) > 254) return false;
 
+    return true;
+}
+
+function checkByRegexForAdding($info) {
+    $nameRegex = '/^[^0-9]+$/';
+    $numberRegex = '/^[0-9]{1,4}$/';
+
+    if (!preg_match($nameRegex, $info["name"])) return false;
+    if (!preg_match($nameRegex, $info["surname"])) return false;
+    if (!preg_match($nameRegex, $info["sex"])) return false;
+    if (!preg_match($nameRegex, $info["country"])) return false;
+
+    if (!preg_match($numberRegex, $info["birth"])) return false;
+    if (empty($info["death"])) return true;
+    else if (!preg_match($numberRegex, $info["death"])) return false;
+    if (!preg_match($numberRegex, $info["year"])) return false;
+
+    return true;
+}
+
+
+function checkByRegexForEditing($info) {
+    $nameRegex = '/^([^0-9]*)$/';
+    $numberRegex = '/^$|^[0-9]{1,4}$/';
+
+    if (!preg_match($nameRegex, $info["name"])) return false;
+    if (!preg_match($nameRegex, $info["surname"])) return false;
+    if (!preg_match($nameRegex, $info["sex"])) return false;
+    if (!preg_match($nameRegex, $info["country"])) return false;
+
+    if (!preg_match($numberRegex, $info["birth"])) return false;
+    if (!preg_match($numberRegex, $info["death"])) return false;
+    if (!preg_match($numberRegex, $info["year"])) return false;
+
+    return true;
+}
+
+function checkRegisterByRegex($email) {
+    $emailRegex = '/^[^\.\s][\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/';
+    if (!preg_match($emailRegex, $email)) {
+        return false;
+    }
     return true;
 }

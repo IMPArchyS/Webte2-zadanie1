@@ -52,6 +52,7 @@ $(function () {
                     $('#feedbackToast').addClass('impToastGood');
                     $('#feedbackToast').removeClass('impToastBad');
                     $('#toastInfo').text('Úspech');
+                    $('#feedbackToastText').text('Úspešne odstránený');
                     $('#feedbackToast').toast('show');
                     setTimeout(function () {
                         $('#feedbackToast').toast('hide');
@@ -61,6 +62,7 @@ $(function () {
                     $('#editPersonModal').modal('hide');
                     $('#feedbackToast').removeClass('impToastGood');
                     $('#toastInfo').text('Neúspech');
+                    $('#feedbackToastText').text('Nastala chyba');
                     $('#feedbackToast').toast('show');
                     $('#feedbackToast').addClass('impToastBad');
                     setTimeout(function () {

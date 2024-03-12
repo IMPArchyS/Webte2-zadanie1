@@ -73,7 +73,6 @@
     createTableHeader($sort, $order, $page, $itemsPerPage, $year, $category);
 
     if ($result->num_rows > 0) {
-        // Fetch and display data of each row
         while($row = $result->fetch_assoc()) {
             fnc\createTableRow($row);
         }
@@ -83,8 +82,6 @@
     echo "</section>";
     echo "</main>";
 
-
-    /// Close connection
     $mysqli->close();
     include_once "php/footer.php";
 ?>

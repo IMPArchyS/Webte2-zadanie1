@@ -36,7 +36,7 @@
     ?>
 
     <div class="container impContainer">
-        <h1 class="impFontW">Prihlásenie</h1>
+        <h1 class="impFontH text-center">Prihlásenie</h1>
         <form method="POST" action="login.php" id="loginForm">
             
             <div class="form-group my-2">

@@ -24,21 +24,12 @@
 
 ?>
 
-<div id="feedbackToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="toast-header">
-        <strong id="toastInfo" class="mr-auto">Feedback</strong>
-    </div>
-    <div id="feedbackToastbody" class="toast-body">
-        <p id="feedbackToastText"></p>
-    </div>
-</div>
-
 <div class="container impContainer">
     <form method="post" id="sendFormData">
-        <h3 class="text-center impFontW">Pridať Výťaza</h3>
+        <h3 class="text-center impFontH">Pridať Výťaza</h3>
         
         <div id="person-details">
-            <h4 class="impFontW">Osobné údaje</h4>
+            <h4 class="impFontH">Osobné údaje</h4>
             <div class="row">
                 <div class="col-md-6 form-group">
                     <label class="my-1 impFontW font-weight-bold fs-5" for="name">*Meno</label>
@@ -78,7 +69,7 @@
             </div>
         </div>
         <div id="prize-information">
-            <h4 class="impFontW">Informácie o cene</h4>
+            <h4 class="impFontH">Informácie o cene</h4>
             <div class="row">
                 <div class="col-md-6 form-group">
                     <label class="my-1 impFontW font-weight-bold fs-5" for="year">Rok</label>
@@ -111,7 +102,7 @@
         </div>
         
         <div id="prize-details" class="d-none">
-            <h4 class="impFontW">Detaily ceny</h4>
+            <h4 class="impFontH">Detaily ceny</h4>
             <div class="row">
                 <div class="col-md-6 form-group">
                     <label class="my-1 impFontW font-weight-bold fs-5" for="language_en">Jazyk (EN)</label>
@@ -141,6 +132,14 @@
                 </div>
         </div>
 </form>
+</div>
+<div id="feedbackToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+        <strong id="toastInfo" class="mr-auto">Feedback</strong>
+    </div>
+    <div id="feedbackToastbody" class="toast-body">
+        <p id="feedbackToastText"></p>
+    </div>
 </div>
 <?php
     include_once "footer.php";

@@ -23,6 +23,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         'genre_sk' => $_POST['genre_sk']
     ];
 
+    if (!dbs\checkByRegexForAdding($result)) {
+        echo "fail";
+        exit();
+    }
+
     if (!dbs\checkInfo($result)) {
         echo "fail";
         exit();
@@ -73,7 +78,7 @@ function insertPersonIntoDB($information, $config) {
 
     $birth = isset($information["birth"]) && $information["birth"] !== "" ? (int)$information["birth"] : 0;
     $death = isset($information["death"]) && $information["death"] !== "" ? (int)$information["death"] : 0;
-    $sex = substr($information["sex"], 0, 1);
+    $sex = mb_substr($information["sex"], 0, 1, 'UTF-8');
     
     $stmt->bind_param("sssssss", $information["name"], $information["surname"], $information["organisation"], $sex, $birth, $death, $countryId);
 
