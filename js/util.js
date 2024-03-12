@@ -15,6 +15,7 @@ $(function () {
             method: 'POST',
             success: function (response) {
                 $('#cookieModal').addClass('d-none');
+                $('#cookieModalBackdrop').addClass('d-none');
                 console.log('uspech');
             },
             error: function (xhr, status, error) {

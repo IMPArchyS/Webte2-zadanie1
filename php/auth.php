@@ -33,7 +33,7 @@
         if (isset($qrcode)) {
             // Pokial bol vygenerovany QR kod po uspesnej registracii, zobraz ho.
 
-            $message = '<div class="container">
+            $message = '<div class="container impContainer">
                 <div class="row">
                     <div class="col-md-6 offset-md-3">
                         <div class="card mt-5">
@@ -46,7 +46,7 @@
                                         <input type="number" id="2fa" name="2fa" class="form-control">
                                         <p id="2faError" class="text-danger d-none">This field is required</p>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Verify</button>
+                                    <button type="submit" class="impGreenButton btn btn-primary">Verify</button>
                                 </form>
                             </div>
                         </div>

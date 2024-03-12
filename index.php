@@ -24,10 +24,10 @@
     /// connect to DB
     $mysqli = fnc\createMySqlConnection($dbconfig);
 
-    echo "<main class='container'>";
+    echo "<main class='container impContainer'>";
     if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     } else {
-        echo '<a class="btn btn-primary mx-0" href="php/restricted.php">Pridať Výťaza</a>';
+        echo '<a class="impButton btn btn-primary mx-0" href="php/restricted.php">Pridať Výťaza</a>';
     }
     /// filters
     $page = isset($_GET['page']) ? $_GET['page'] : 1;
@@ -69,7 +69,7 @@
     /// table
     echo "<section>";
     createComboBoxes($mysqli, $itemsPerPage, $year, $category);
-    echo "<table class='table table-bordered table-striped' id='nobelStuff'>";
+    echo "<table class='table table-bordered table-striped table-dark my-4' id='nobelStuff'>";
     createTableHeader($sort, $order, $page, $itemsPerPage, $year, $category);
 
     if ($result->num_rows > 0) {

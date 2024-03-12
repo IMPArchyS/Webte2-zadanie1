@@ -35,26 +35,26 @@
         $auth_url = $client->createAuthUrl();
     ?>
 
-    <div class="container">
+    <div class="container impContainer">
         <h1>Prihlásenie</h1>
         <form method="POST" action="login.php" id="loginForm">
             
-            <div class="form-group">
-                <label for="email">Email</label>
+            <div class="form-group my-2">
+                <label class="font-weight-bold fs-5"  for="email">Email</label>
                 <input type="email" class="form-control" id="email" name="email" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>">
                 <p id="emailError" class="text-danger d-none">Neplatný email</p>
             </div>
-            <div class="form-group">
-                <label for="password">Heslo</label>
+            <div class="form-group my-2">
+                <label class="font-weight-bold fs-5"  for="password">Heslo</label>
                 <input type="password" class="form-control" id="password" name="password">
                 <p id="passwordError" class="text-danger d-none">Povinné pole</p>
             </div>
-            <div class="form-group">
-                <label for="2fa">2FA kód</label>
+            <div class="form-group my-2">
+                <label class="font-weight-bold fs-5" for="2fa">2FA kód</label>
                 <input type="number" class="form-control" id="2fa" name="2fa">
                 <p id="2faError" class="text-danger d-none">Povinné pole</p>
             </div>
-            <button id="submitLoginButton" type="submit" class="my-3 btn btn-primary">Prihlásiť sa</button>
+            <button id="submitLoginButton" type="submit" class="impGreenButton my-3 btn btn-primary">Prihlásiť sa</button>
         </form>
     <p id="wrongCreds" class="text-danger d-none">Zlé údaje</p>
         <div class ="googleSign">

@@ -49,7 +49,7 @@
 
     if ($row) {
         // Display the fetched data
-        echo '<div class="container">';
+        echo '<div class="container impContainer">';
         echo '<h4>Person Details</h4>';
         echo '<div class="row">';
         echo '<div class="col-md-6">';
@@ -72,9 +72,9 @@
 
     if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
         echo "<form id='sendFormData' action='post' class=''>";
-        echo "<button id='user-delete-person' class='btn btn-danger mb-3' data-person-id=" . $personId . ">Vymazať Výťaza</button>";
+        echo "<button id='user-delete-person' class='impRedButton btn btn-danger mb-3' data-person-id=" . $personId . ">Vymazať Výťaza</button>";
         echo "</form>";
-        echo '<button id="user-edit-person" class="btn btn-primary mb-3">Upraviť Informácie</button>';
+        echo '<button id="user-edit-person" class="impGreenButton btn btn-primary mb-3">Upraviť Informácie</button>';
 
     
         echo '
@@ -189,6 +189,7 @@
         </div>
         ';
     }
+    echo '</div>';
     include_once "footer.php";
 
     $stmt->close();

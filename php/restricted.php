@@ -33,7 +33,7 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container impContainer">
     <form method="post" id="sendFormData">
         <h3 class="text-center">Pridať Výťaza</h3>
         
@@ -137,7 +137,7 @@
         </div>
         <div class="row">
                 <div class="col-12 text-center mb-4">
-                    <button name="submit" id="pushChanges" type="submit" class="btn btn-primary btn-lg mt-3">Pridať</button>
+                    <button name="submit" id="pushChanges" type="submit" class="impGreenButton btn btn-primary btn-lg mt-3">Pridať</button>
                 </div>
         </div>
 </form>

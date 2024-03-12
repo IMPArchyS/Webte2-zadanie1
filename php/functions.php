@@ -70,25 +70,25 @@ namespace fnc;
     }
 
     function createPagination($page, $totalPages, $itemsPerPage, $sort, $order, $year, $category): void {
-        echo '<div class="pagination d-flex justify-content-center align-items-center">';
+        echo '<div class="pagination m-2 d-flex justify-content-center align-items-center">';
 
         $startPage = max(1, $page - 2);
         $endPage = min($startPage + 4, $totalPages);
 
         if ($startPage > 1) {
-            echo '<a class="btn btn-primary" href="?page=1&itemsPerPage=' . $itemsPerPage . '&sort=' . $sort . '&order=' . $order . '&year=' . $year . '&category=' . $category . '">1</a>';
+            echo '<a class="impPag btn btn-primary" href="?page=1&itemsPerPage=' . $itemsPerPage . '&sort=' . $sort . '&order=' . $order . '&year=' . $year . '&category=' . $category . '">1</a>';
         }
 
         for ($i = $startPage; $i <= $endPage; $i++) {
             if ($i == $page) {
-                echo '<strong class="btn btn-primary">' . $i . '</strong>';
+                echo '<strong class="impCurrent btn btn-primary">' . $i . '</strong>';
             } else {
-                echo '<a class="btn btn-primary" href="?page=' . $i . '&itemsPerPage=' . $itemsPerPage . '&sort=' . $sort . '&order=' . $order . '&year=' . $year . '&category=' . $category . '">' . $i . '</a>';
+                echo '<a class="impPag btn btn-primary" href="?page=' . $i . '&itemsPerPage=' . $itemsPerPage . '&sort=' . $sort . '&order=' . $order . '&year=' . $year . '&category=' . $category . '">' . $i . '</a>';
             }
         }
 
         if ($endPage < $totalPages) {
-            echo '<a class="btn btn-primary" href="?page=' . $totalPages . '&itemsPerPage=' . $itemsPerPage . '&sort=' . $sort . '&order=' . $order . '&year=' . $year . '&category=' . $category . '">' . $totalPages . '</a>';
+            echo '<a class="impPag btn btn-primary" href="?page=' . $totalPages . '&itemsPerPage=' . $itemsPerPage . '&sort=' . $sort . '&order=' . $order . '&year=' . $year . '&category=' . $category . '">' . $totalPages . '</a>';
         }
 
 
