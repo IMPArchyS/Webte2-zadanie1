@@ -14,32 +14,32 @@
         include_once "regHeader.php";
     ?>
     <div class="container impContainer">
-        <h1>Registrácia</h1>
+        <h1 class="impFontW">Registrácia</h1>
         <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" id="loginForm">
             <div class="form-group my-2">
-                <label class="font-weight-bold fs-5"  for="firstname">*Meno</label>
-                <input type="text" class="form-control" id="firstname" name="firstname" value="<?php echo isset($_POST['firstname']) ? htmlspecialchars($_POST['firstname']) : ''; ?>">
+                <label class="font-weight-bold impFontW fs-5"  for="firstname">*Meno</label>
+                <input type="text" class="form-control impSelect text-light" id="firstname" name="firstname" value="<?php echo isset($_POST['firstname']) ? htmlspecialchars($_POST['firstname']) : ''; ?>">
                 <p id="firstnameError" class="text-danger d-none">Povinné pole</p>
             </div>
             <div class="form-group my-2">
-                <label class="font-weight-bold fs-5"  for="lastname">*Priezvisko</label>
-                <input type="text" class="form-control" id="lastname" name="lastname" value="<?php echo isset($_POST['lastname']) ? htmlspecialchars($_POST['lastname']) : ''; ?>">
+                <label class="font-weight-bold impFontW fs-5"  for="lastname">*Priezvisko</label>
+                <input type="text" class="form-control impSelect text-light" id="lastname" name="lastname" value="<?php echo isset($_POST['lastname']) ? htmlspecialchars($_POST['lastname']) : ''; ?>">
                 <p id="lastnameError" class="text-danger d-none">Povinné pole</p>
             </div>
             <div class="form-group my-2">
-                <label class="font-weight-bold fs-5"  for="email">*Email</label>
-                <input type="email" class="form-control" id="email" name="email" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>">
+                <label class="font-weight-bold impFontW fs-5"  for="email">*Email</label>
+                <input type="email" class="form-control impSelect text-light" id="email" name="email" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>">
                 <p id="emailError" class="text-danger d-none">Neplatný email</p>
             </div>
             <div class="form-group my-2">
-                <label class="font-weight-bold fs-5"  for="password">*Heslo</label>
-                <input type="password" class="form-control" id="password" name="password">
+                <label class="font-weight-bold impFontW fs-5"  for="password">*Heslo</label>
+                <input type="password" class="form-control impSelect text-light" id="password" name="password">
                 <p id="passwordError" class="text-danger d-none">Povinné pole</p>
             </div>
             <button type="submit" class="impGreenButton btn btn-primary my-2">Registrovať</button>
         </form>
         <p id="userOccupied" class="text-danger d-none">Email sa používa</p>
-        <p class="my-2">Už zaregistrovaný? <a href="login.php">Prihlásiť sa</a></p>
+        <p class="my-2 text-light">Už zaregistrovaný? <a href="login.php">Prihlásiť sa</a></p>
     <script src="../js/registerLogic.js"></script>
     <?php 
     error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);

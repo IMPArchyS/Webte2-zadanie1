@@ -50,24 +50,35 @@
     if ($row) {
         // Display the fetched data
         echo '<div class="container impContainer">';
-        echo '<h4>Person Details</h4>';
+        echo '<h4 class="my-2 impFontW">Person Details</h4>';
         echo '<div class="row">';
         echo '<div class="col-md-6">';
-        echo '<p><strong>Name:</strong> ' . $row['name'] . '</p>';
-        echo '<p><strong>Surname:</strong> ' . $row['surname'] . '</p>';
-        echo '<p><strong>Sex:</strong> ' . $row['sex'] . '</p>';
-        echo '<p><strong>Organisation:</strong> ' . $row['organisation'] . '</p>';
-        echo '<p><strong>Contribution (English):</strong> ' . $row['contribution_en'] . '</p>';
-        echo '<p><strong>Contribution (Slovak):</strong> ' . $row['contribution_sk'] . '</p>';
+        echo '<h5 class="my-1 impFontW font-weight-bold">Meno:</h5>';
+        echo '<p class="text-light">' . $row['name'] . '</p>';
+        echo '<h5 class="my-1 impFontW font-weight-bold">Priezvisko:</h5>';
+        echo '<p class="text-light">' . $row['surname'] . '</p>';
+        echo '<h5 class="my-1 impFontW font-weight-bold">Pohlavie:</h5>';
+        echo '<p class="text-light">' . $row['sex'] . '</p>';
+        echo '<h5 class="my-1 impFontW font-weight-bold">Organizácia:</h5>';
+        echo '<p class="text-light">' . $row['organisation'] . '</p>';
         echo '</div>';
         echo '<div class="col-md-6">';
-        echo '<p><strong>Birth:</strong> ' . $row['birth'] . '</p>';
-        echo '<p><strong>Death:</strong> ' . $row['death'] . '</p>';
-        echo '<p><strong>Country:</strong> ' . $row['countryName'] . '</p>';
-        echo '<p><strong>Year:</strong> ' . $row['year'] . '</p>';
-        echo '<p><strong>Category:</strong> ' . $row['category'] . '</p>';
+        echo '<h5 class="my-1 impFontW font-weight-bold">Narodenie:</h5>';
+        echo '<p class="text-light">' . $row['birth'] . '</p>';
+        echo '<h5 class="my-1 impFontW font-weight-bold">Úmrtie:</h5>';
+        echo '<p class="text-light">' . $row['death'] . '</p>';
+        echo '<h5 class="my-1 impFontW font-weight-bold">Krajina:</h5>';
+        echo '<p class="text-light">' . $row['countryName'] . '</p>';
+        echo '<h5 class="my-1 impFontW font-weight-bold">Rok:</h5>';
+        echo '<p class="text-light">' . $row['year'] . '</p>';
+        echo '<h5 class="my-1 impFontW font-weight-bold">Kategória:</h5>';
+        echo '<p class="text-light">' . $row['category'] . '</p>';
         echo '</div>';
         echo '</div>';
+        echo '<h5 class="my-1 impFontW font-weight-bold">Príspevok (EN):</h5>';
+        echo '<p class="text-light">' . $row['contribution_en'] . '</p>';
+        echo '<h5 class="my-1 impFontW font-weight-bold">Príspevok (SK):</h5>';
+        echo '<p class="text-light">' . $row['contribution_sk'] . '</p>';
     }
 
     if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
@@ -80,60 +91,60 @@
         echo '
                 <div class="container d-none" id="editPersonContainer">
             <form method="post" id="editFormData">
-                <h3 class="text-center">Edit Nobel Prize Winner</h3>
+                <h3 class="text-center impFontW">Edit Nobel Prize Winner</h3>
                 
                 <div id="person-details">
-                    <h4>Osobné údaje</h4>
+                    <h4 class="impFontW">Osobné údaje</h4>
                     <div class="row">
                         <div class="col-md-6 form-group">
-                            <label for="name">Meno</label>
-                            <input type="text" class="form-control" id="name" name="name">
+                            <label class="my-1 impFontW font-weight-bold fs-5" for="name">Meno</label>
+                            <input type="text" class="form-control text-light impSelect" id="name" name="name">
                             <p id="nameError" class="text-danger"></p>
                             </div>
                             <div class="col-md-6 form-group">
-                                <label for="surname">Priezvisko</label>
-                                <input type="text" class="form-control" id="surname" name="surname">
+                                <label class="my-1 impFontW font-weight-bold fs-5" for="surname">Priezvisko</label>
+                                <input type="text" class="form-control text-light impSelect" id="surname" name="surname">
                                 <p id="surnameError" class="text-danger"></p>
                             </div>
                             <div class="col-md-6 form-group">
-                                <label for="sex">Pohlavie</label>
-                                <input type="text" class="form-control" id="sex" name="sex">
+                                <label class="my-1 impFontW font-weight-bold fs-5" for="sex">Pohlavie</label>
+                                <input type="text" class="form-control text-light impSelect" id="sex" name="sex">
                                 <p id="sexError" class="text-danger"></p>
                             </div>
                             <div class="col-md-6 form-group">
-                                <label for="organisation">Organizácia</label>
-                                <input type="text" class="form-control" id="organisation" name="organisation">
+                                <label class="my-1 impFontW font-weight-bold fs-5" for="organisation">Organizácia</label>
+                                <input type="text" class="form-control text-light impSelect" id="organisation" name="organisation">
                                 <p id="organisationError" class="text-danger"></p>
                             </div>
                             <div class="col-md-6 form-group">
-                                <label for="birth">Narodenie</label>
-                                <input type="number" class="form-control" id="birth" name="birth">
+                                <label class="my-1 impFontW font-weight-bold fs-5" for="birth">Narodenie</label>
+                                <input type="number" class="form-control text-light impSelect" id="birth" name="birth">
                                 <p id="birthError" class="text-danger"></p>
                             </div>
                             <div class="col-md-6 form-group">
-                                <label for="death">Úmrtie</label>
-                                <input type="number" class="form-control" id="death" name="death">
+                                <label class="my-1 impFontW font-weight-bold fs-5" for="death">Úmrtie</label>
+                                <input type="number" class="form-control text-light impSelect" id="death" name="death">
                                 <p id="deathError" class="text-danger"></p>
                             </div>
                             <div class="form-group">
-                                <label for="country">Krajina</label>
-                                <input type="text" class="form-control" id="country" name="country">
+                                <label class="my-1 impFontW font-weight-bold fs-5" for="country">Krajina</label>
+                                <input type="text" class="form-control text-light impSelect" id="country" name="country">
                                 <p id="countryError" class="text-danger"></p>
                         </div>
                     </div>
                 </div>
                 <div id="prize-information">
-                    <h4>Informácie o cene</h4>
+                    <h4 class="impFontW">Informácie o cene</h4>
                     <div class="row">
                         <div class="col-md-6 form-group">
-                            <label for="year">Rok</label>
-                            <input type="text" class="form-control" id="year" name="year">
+                            <label class="my-1 impFontW font-weight-bold fs-5" for="year">Rok</label>
+                            <input type="text" class="form-control text-light impSelect" id="year" name="year">
                             <p id="yearError" class="text-danger"></p>
 
                         </div>
                         <div class="col-md-6 form-group">
-                            <label for="category">Kategória</label>
-                            <select class="form-control" id="category" name="category">
+                            <label class="my-1 impFontW font-weight-bold fs-5" for="category">Kategória</label>
+                            <select class="form-control text-light impSelect" id="category" name="category">
                                 <option value="Physics">Fyzika</option>
                                 <option value="Chemistry">Chémia</option>
                                 <option value="Medicine">Medicína</option>
@@ -142,40 +153,40 @@
                             </select>
                         </div>
                         <div class="col-md-6 form-group">
-                            <label for="contribution_en">Príspevok (EN)</label>
-                            <textarea class="form-control" id="contribution_en" name="contribution_en" style="resize: none;"></textarea>
+                            <label class="my-1 impFontW font-weight-bold fs-5" for="contribution_en">Príspevok (EN)</label>
+                            <textarea class="form-control text-light impSelect" id="contribution_en" name="contribution_en" style="resize: none;"></textarea>
                             <p id="contribution_enError" class="text-danger"></p>
 
                         </div>
                         <div class="col-md-6 form-group">
-                            <label for="contribution_sk">Príspevok (SK)</label>
-                            <textarea class="form-control" id="contribution_sk" name="contribution_sk" style="resize: none;"></textarea>
+                            <label class="my-1 impFontW font-weight-bold fs-5" for="contribution_sk">Príspevok (SK)</label>
+                            <textarea class="form-control text-light impSelect" id="contribution_sk" name="contribution_sk" style="resize: none;"></textarea>
                             <p id="contribution_skError" class="text-danger"></p>
                         </div>
                     </div>
                 </div>
                 
                 <div id="prize-details" class="d-none">
-                    <h4>Detaily Ceny</h4>
+                    <h4 class="impFontW">Detaily Ceny</h4>
                     <div class="row">
                         <div class="col-md-6 form-group">
-                            <label for="language_en">Jazyk (EN)</label>
-                            <input type="text" class="form-control" id="language_en" name="language_en">
+                            <label class="my-1 impFontW font-weight-bold fs-5" for="language_en">Jazyk (EN)</label>
+                            <input type="text" class="form-control text-light impSelect" id="language_en" name="language_en">
                             <p id="language_enError" class="text-danger"></p>
                         </div>
                         <div class="col-md-6 form-group">
-                            <label for="language_sk">Jazyk (SK)</label>
-                            <input type="text" class="form-control" id="language_sk" name="language_sk">
+                            <label class="my-1 impFontW font-weight-bold fs-5" for="language_sk">Jazyk (SK)</label>
+                            <input type="text" class="form-control text-light impSelect" id="language_sk" name="language_sk">
                             <p id="language_skError" class="text-danger"></p>
                         </div>
                         <div class="col-md-6 form-group">
-                            <label for="genre_en">Žáner (EN)</label>
-                            <input type="text" class="form-control" id="genre_en" name="genre_en">
+                            <label class="my-1 impFontW font-weight-bold fs-5" for="genre_en">Žáner (EN)</label>
+                            <input type="text" class="form-control text-light impSelect" id="genre_en" name="genre_en">
                             <p id="genre_enError" class="text-danger"></p>
                         </div>
                         <div class="col-md-6 form-group">
-                            <label for="genre_sk">Žáner (SK)</label>
-                            <input type="text" class="form-control" id="genre_sk" name="genre_sk">
+                            <label class="my-1 impFontW font-weight-bold fs-5" for="genre_sk">Žáner (SK)</label>
+                            <input type="text" class="form-control text-light impSelect" id="genre_sk" name="genre_sk">
                             <p id="genre_skError" class="text-danger"></p>
                         </div>
                     </div>

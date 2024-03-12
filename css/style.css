@@ -16,25 +16,30 @@ a {
     margin: 5px;
 }
 
-tr a {
+thead a {
     color: darkorchid;
+}
+
+tbody a {
+    color: rgb(217, 141, 255);
 }
 
 .impFontW {
     color: rgb(255, 209, 251) !important;
 }
 
-.impError {
-    border: 2px solid red !important;
-}
 .fit-picture {
-    max-width: 400px;
+    max-width: 25%;
     max-height: 200px;
 }
 
 .impSelect {
     background-color: #212529 !important;
     border-color: #212529 !important;
+}
+
+.impError {
+    border: 2px solid crimson !important;
 }
 
 #feedbackToast {

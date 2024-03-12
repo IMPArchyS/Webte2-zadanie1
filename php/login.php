@@ -36,22 +36,22 @@
     ?>
 
     <div class="container impContainer">
-        <h1>Prihlásenie</h1>
+        <h1 class="impFontW">Prihlásenie</h1>
         <form method="POST" action="login.php" id="loginForm">
             
             <div class="form-group my-2">
-                <label class="font-weight-bold fs-5"  for="email">Email</label>
-                <input type="email" class="form-control" id="email" name="email" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>">
+                <label class="font-weight-bold impFontW fs-5"  for="email">Email</label>
+                <input type="email" class="form-control text-light impSelect" id="email" name="email" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>">
                 <p id="emailError" class="text-danger d-none">Neplatný email</p>
             </div>
             <div class="form-group my-2">
-                <label class="font-weight-bold fs-5"  for="password">Heslo</label>
-                <input type="password" class="form-control" id="password" name="password">
+                <label class="font-weight-bold impFontW fs-5"  for="password">Heslo</label>
+                <input type="password" class="form-control text-light impSelect" id="password" name="password">
                 <p id="passwordError" class="text-danger d-none">Povinné pole</p>
             </div>
             <div class="form-group my-2">
-                <label class="font-weight-bold fs-5" for="2fa">2FA kód</label>
-                <input type="number" class="form-control" id="2fa" name="2fa">
+                <label class="font-weight-bold impFontW fs-5" for="2fa">2FA kód</label>
+                <input type="number" class="form-control text-light impSelect" id="2fa" name="2fa">
                 <p id="2faError" class="text-danger d-none">Povinné pole</p>
             </div>
             <button id="submitLoginButton" type="submit" class="impGreenButton my-3 btn btn-primary">Prihlásiť sa</button>
@@ -63,7 +63,7 @@
         echo '<a class="m-0" href="'.filter_var($authUrl, FILTER_SANITIZE_URL).'"><img src="../images/googleSign.png" class="my-3" style="width: 250px; height: 50px;"alt="fajny google login"></a>';
         ?>
     </div>
-        <p>Nový člen? <a href="register.php">Registrovať tu</a></p>
+        <p class="text-light">Nový člen? <a href="register.php">Registrovať tu</a></p>
         
     </div>
     <?php 

@@ -42,11 +42,11 @@
                                 <img src="'.$qrcode.'" alt="qr kod pre aplikaciu authenticator" class="img-fluid">
                                 <form action="auth.php" method="post" id="form">
                                     <div class="form-group">
-                                        <label for="2fa">2FA Code:</label>
+                                        <label for="2fa">2FA kód:</label>
                                         <input type="number" id="2fa" name="2fa" class="form-control">
                                         <p id="2faError" class="text-danger d-none">This field is required</p>
                                     </div>
-                                    <button type="submit" class="impGreenButton btn btn-primary">Verify</button>
+                                    <button type="submit" class="my-2 impGreenButton btn btn-primary">Overiť</button>
                                 </form>
                             </div>
                         </div>
@@ -81,7 +81,7 @@
                 $_SESSION = array();
                 session_unset();
                 session_start();
-                $_SESSION["regHalf"] = true;
+                $_SESSION["regHalf"] = false;
     
                 header("location: login.php");
             }
