@@ -77,7 +77,7 @@ function insertPersonIntoDB($information, $config) {
     $stmt = $conn->prepare("INSERT INTO persons (name, surname, organisation, sex, birth, death, country_id) VALUES (?, ?, ?, ?, ?, ?, ?)");
 
     $birth = isset($information["birth"]) && $information["birth"] !== "" ? (int)$information["birth"] : 0;
-    $death = isset($information["death"]) && $information["death"] !== "" ? (int)$information["death"] : 0;
+    $death = isset($information["death"]) && $information["death"] !== "" ? (int)$information["death"] : null;
     $sex = mb_substr($information["sex"], 0, 1, 'UTF-8');
     
     $stmt->bind_param("sssssss", $information["name"], $information["surname"], $information["organisation"], $sex, $birth, $death, $countryId);
